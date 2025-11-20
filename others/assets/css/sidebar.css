@@ -1,0 +1,514 @@
+/* ========================================
+   HOVER-EXPANDABLE SIDEBAR STYLES
+   ======================================== */
+
+/* Main Sidebar Container - Collapsed by Default */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 100vh;
+  background: linear-gradient(180deg, var(--sidebar-top) 0%, var(--sidebar-mid) 50%, var(--sidebar-bottom) 100%);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Expanded Sidebar on Hover */
+.sidebar:hover {
+  width: 240px;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Sidebar Header with Logo */
+.sidebar-header {
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-logoforanzoml {
+  font-size: 36px;
+  filter: drop-shadow(0 0 15px var(--sidebar-icon-glow));
+  animation: float 3s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.3s ease, font-size 0.3s ease;
+  min-width: 36px;
+}
+
+.sidebar:hover .sidebar-logoforanzoml {
+  font-size: 42px;
+}
+
+.sidebar-logoforanzoml:hover {
+  transform: scale(1.15) rotate(15deg);
+}
+
+/* Floating Animation (sidebar logo*/
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Sidebar Navigation Container */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 10px;
+  flex: 1;
+}
+
+/* Individual Sidebar Links - Icon Only */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+/* Hide text by default */
+.sidebar-link span {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, width 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Show text on sidebar hover */
+.sidebar:hover .sidebar-link span {
+  opacity: 1;
+  width: auto;
+}
+
+/* Animated Background Effect on Hover */
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sidebar-hover-gradient) 0%, transparent 100%);
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.sidebar-link:hover::before {
+  width: 100%;
+}
+
+/* Hover State */
+.sidebar-link:hover {
+  color: var(--sidebar-text-hover);
+  background: var(--sidebar-hover);
+  transform: translateX(3px);
+}
+
+/* Active State - Gradient Background */
+.sidebar-link.active {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-text-hover);
+  box-shadow: 0 4px 15px var(--sidebar-active-shadow);
+  font-weight: 600;
+}
+
+/* Active State - Left Accent Border */
+.sidebar-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: var(--sidebar-accent-border);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px var(--sidebar-accent-glow);
+}
+
+/* Sidebar Icons - Centered when collapsed */
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  stroke-width: 2.5;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Icon Hover Effect */
+.sidebar-link:hover .sidebar-icon {
+  transform: scale(1.1);
+}
+
+/* Icon Active Effect */
+.sidebar-link.active .sidebar-icon {
+  filter: drop-shadow(0 0 8px var(--sidebar-icon-active-glow));
+  stroke-width: 2.8;
+}
+
+/* Main Content Area Adjustment - Collapsed */
+.main-content {
+  margin-left: 70px;
+  min-height: 100vh;
+  width: calc(100% - 70px);
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Push main content when sidebar expands */
+.sidebar:hover ~ .main-content {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+}
+
+/* Container Adjustment */
+.container {
+  padding: 20px;
+  max-width: 100%;
+}
+
+/* Hide Old Navbar */
+.navbar {
+  display: none !important;
+}
+
+/* Content Fade In Animation */
+.content {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ripple Effect on Click */
+.sidebar-link:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet Landscape - 1024px and below */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 65px;
+  }
+
+  .sidebar:hover {
+    width: 220px;
+  }
+
+  .sidebar-link {
+    padding: 12px;
+  }
+
+  .sidebar-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+
+  .main-content {
+    margin-left: 65px;
+    width: calc(100% - 65px);
+  }
+
+  /* Push effect for tablet landscape */
+  .sidebar:hover ~ .main-content {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
+
+  .sidebar-logoforanzoml {
+    font-size: 32px;
+  }
+
+  .sidebar:hover .sidebar-logoforanzoml {
+    font-size: 38px;
+  }
+}
+
+/* Tablet Portrait - 768px and below */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar:hover {
+    width: 200px;
+  }
+
+  .sidebar-logoforanzoml {
+    font-size: 28px;
+  }
+
+  .sidebar:hover .sidebar-logoforanzoml {
+    font-size: 34px;
+  }
+
+  .sidebar-nav {
+    padding: 0 8px;
+    gap: 5px;
+  }
+
+  .sidebar-link {
+    padding: 12px 10px;
+  }
+
+  .sidebar-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+
+  .main-content {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  /* Push effect for tablet portrait */
+  .sidebar:hover ~ .main-content {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .container {
+    padding: 15px;
+  }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 55px;
+  }
+
+  .sidebar:hover {
+    width: 180px;
+  }
+
+  .sidebar-logoforanzoml {
+    font-size: 24px;
+  }
+
+  .sidebar:hover .sidebar-logoforanzoml {
+    font-size: 30px;
+  }
+
+  .sidebar-nav {
+    padding: 0 6px;
+    gap: 4px;
+  }
+
+  .sidebar-link {
+    padding: 10px 8px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .sidebar-icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    stroke-width: 2.3;
+  }
+
+  .sidebar-link.active::after {
+    width: 3px;
+    height: 50%;
+  }
+
+  .main-content {
+    margin-left: 55px;
+    width: calc(100% - 55px);
+  }
+
+  /* Push effect for mobile */
+  .sidebar:hover ~ .main-content {
+    margin-left: 180px;
+    width: calc(100% - 180px);
+  }
+
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Extra Small Mobile - 360px and below */
+@media (max-width: 360px) {
+  .sidebar {
+    width: 50px;
+  }
+
+  .sidebar:hover {
+    width: 160px;
+  }
+
+  .sidebar-nav {
+    padding: 0 5px;
+  }
+
+  .sidebar-link {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+
+  .sidebar-icon {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+  }
+
+  .sidebar-logoforanzoml {
+    font-size: 20px;
+  }
+
+  .sidebar:hover .sidebar-logoforanzoml {
+    font-size: 26px;
+  }
+
+  .main-content {
+    margin-left: 50px;
+    width: calc(100% - 50px);
+  }
+
+  /* Push effect for extra small mobile */
+  .sidebar:hover ~ .main-content {
+    margin-left: 160px;
+    width: calc(100% - 160px);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus States for Keyboard Navigation */
+.sidebar-link:focus {
+  outline: 2px solid var(--sidebar-accent-glow);
+  outline-offset: 2px;
+}
+
+.sidebar-link:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-link,
+  .sidebar-icon,
+  .sidebar-logoforanzoml,
+  .content,
+  .sidebar-link span,
+  .main-content {
+    animation: none;
+    transition: none;
+  }
+
+  .sidebar-link::before {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .sidebar-link {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .sidebar-link.active {
+    border: 2px solid #ffffff;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
