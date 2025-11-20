@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <link rel="icon" type="image/png" href="https://github.com/GalacticNetwork/jordansmathwork-v5/raw/main/assets/images/jmw.png?raw=true">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  :root {
+  --bgColor: #0a1a0a;
+  --navColor: #1a2e1a;
+  --accentColor: #c41e3a;
+  --textColor: #f0f8ff;
+  --borderColor: #2d5016;
+  --hoverBg: #1f3d1f;
+  --btnBg: #2d5016;
+  --btnHoverBg: #c41e3a;
+}
+
+/* ===== GLOBAL ===== */
+body {
+  background-color: transparent;
+  color: var(--textColor);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== HEADER ===== */
+#header {
+  padding: 20px;
+  text-align: center;
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--textColor);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#header img {
+  width: 20%;
+  height: auto;
+}
+
+/* ===== CONTENT ===== */
+#content {
+  text-align: center;
+  padding: 20px;
+  margin-top: -4%;
+}
+
+#content h1, 
+#content h2, 
+#content h3, 
+#content h4, 
+#content h5, 
+#content h6, 
+#content p, 
+#content li {
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: var(--textColor);
+}
+
+/* ===== SEARCH BAR ===== */
+#searchbar {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.form__input {
+  padding: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  font-size: 16px;
+  width: 300px;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  background-color: var(--navColor);
+  text-align: center;
+  color: var(--textColor);
+  transition: all 0.3s ease;
+}
+
+.form__input::placeholder {
+  color: #aaa;
+  text-align: center;
+}
+
+.form__input:focus {
+  outline: none;
+  background-color: var(--hoverBg);
+  border-color: var(--accentColor);
+}
+
+/* ===== LINKS ===== */
+/* ===== FOOTER ===== */
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid var(--borderColor);
+  width: 100%;
+  height: 15px;
+  background-color: var(--navColor);
+  padding: 7.5px 0 10px 0;
+  text-align: center;
+  color: var(--textColor);
+  font-size: 14px;
+}
+
+/* ===== ICONS ===== */
+.fa {
+  font-size: 24px;
+  margin-right: 10px;
+  color: var(--accentColor);
+  transition: 0.3s;
+}
+
+.fa:hover {
+  color: #aaa;
+}
+
+/* ===== ERROR ===== */
+#uv-error {
+  color: #ff6666 !important;
+  white-space: pre-wrap;
+}
+
+#uv-error-code {
+  font-size: 12px;
+  color: var(--textColor);
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* ===== SERVICE WORKER BUTTON ===== */
+#uv-register-sw {
+  color: var(--textColor);
+  background: var(--btnBg);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  padding: 16px 20px;
+  line-height: 16px;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+#uv-register-sw:active {
+  background: var(--hoverBg);
+}
+
+#uv-register-sw.show {
+  display: block;
+}
+
+/* ===== IMAGES ===== */
+.img {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.img:hover {
+  animation: enlarge 0.5s ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes enlarge {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/* ===== SELECT & SWITCHER ===== */
+option {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  border-radius: 10px;
+  background: var(--hoverBg);
+  color: var(--textColor);
+}
+
+#bareSwitcher {
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+  color: var(--textColor);
+  background-color: var(--btnBg);
+  border: 1px solid var(--borderColor);
+  width: 150px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+#bareSwitcher:hover {
+  background-color: var(--btnHoverBg);
+  color: #fff;
+}
+
+</style>
+
+<!-- Theme Synchronization Script -->
+<script>
+(function() {
+  // Theme configurations matching scripts.js
+  const themes = {
+    original: { bgColor: '#121826', navColor: '#1e2433', accentColor: '#4f90ff', textColor: '#e0e6f1', borderColor: '#38415d', hoverBg: '#2a2f48', btnBg: '#3b466f', btnHoverBg: '#4f90ff' },
+    halloween: { bgColor: '#0a0a0a', navColor: '#1a0f0a', accentColor: '#ff6600', textColor: '#ffa500', borderColor: '#331a00', hoverBg: '#2a1a0f', btnBg: '#4a2a1a', btnHoverBg: '#ff6600' },
+    christmas: { bgColor: '#0a1a0a', navColor: '#1a2e1a', accentColor: '#c41e3a', textColor: '#f0f8ff', borderColor: '#2d5016', hoverBg: '#1f3d1f', btnBg: '#2d5016', btnHoverBg: '#c41e3a' },
+    dark: { bgColor: '#0a0a0a', navColor: '#1a1a1a', accentColor: '#00ff00', textColor: '#ffffff', borderColor: '#333333', hoverBg: '#2a2a2a', btnBg: '#262626', btnHoverBg: '#00ff00' },
+    light: { bgColor: '#f5f5f5', navColor: '#ffffff', accentColor: '#2563eb', textColor: '#1f2937', borderColor: '#e5e7eb', hoverBg: '#e5e7eb', btnBg: '#d1d5db', btnHoverBg: '#2563eb' },
+    midnight: { bgColor: '#0f0f23', navColor: '#1a1a2e', accentColor: '#9d4edd', textColor: '#e0e0e0', borderColor: '#3c3c5a', hoverBg: '#2a2a4e', btnBg: '#3c3c6f', btnHoverBg: '#9d4edd' },
+    ocean: { bgColor: '#001f3f', navColor: '#0a2f4f', accentColor: '#00d4ff', textColor: '#cfe2f3', borderColor: '#1a4f6f', hoverBg: '#1a3f5f', btnBg: '#2a5f7f', btnHoverBg: '#00d4ff' },
+    sunset: { bgColor: '#2d1b2e', navColor: '#3d2b3e', accentColor: '#ff6b9d', textColor: '#fce4ec', borderColor: '#5d4b5e', hoverBg: '#4d3b4e', btnBg: '#6d5b6e', btnHoverBg: '#ff6b9d' },
+    forest: { bgColor: '#1a2f1a', navColor: '#2a3f2a', accentColor: '#7cb342', textColor: '#e8f5e9', borderColor: '#3a5f3a', hoverBg: '#3a4f3a', btnBg: '#4a6f4a', btnHoverBg: '#7cb342' },
+    purple: { bgColor: '#1a0a2e', navColor: '#2a1a3e', accentColor: '#b744f7', textColor: '#f0e6ff', borderColor: '#4a3a5e', hoverBg: '#3a2a4e', btnBg: '#5a4a6e', btnHoverBg: '#b744f7' },
+    cyberpunk: { bgColor: '#0d0221', navColor: '#1a0b3a', accentColor: '#ff006e', textColor: '#00f5ff', borderColor: '#8338ec', hoverBg: '#2a1a4a', btnBg: '#3a2a5a', btnHoverBg: '#ff006e' },
+    matrix: { bgColor: '#000000', navColor: '#0a1a0a', accentColor: '#00ff41', textColor: '#00ff41', borderColor: '#003b00', hoverBg: '#0a2a0a', btnBg: '#1a3a1a', btnHoverBg: '#00ff41' },
+    neon: { bgColor: '#1a0033', navColor: '#2a0a4a', accentColor: '#ff00ff', textColor: '#00ffff', borderColor: '#4a1a6a', hoverBg: '#3a1a5a', btnBg: '#5a2a7a', btnHoverBg: '#ff00ff' },
+    fire: { bgColor: '#1a0a00', navColor: '#2a1a0a', accentColor: '#ff4500', textColor: '#ffe4b5', borderColor: '#4a2a1a', hoverBg: '#3a1a0a', btnBg: '#5a3a2a', btnHoverBg: '#ff4500' },
+    ice: { bgColor: '#0a1a2a', navColor: '#1a2a3a', accentColor: '#00bfff', textColor: '#e0f7ff', borderColor: '#2a3a4a', hoverBg: '#1a2a3a', btnBg: '#2a4a5a', btnHoverBg: '#00bfff' },
+    retro: { bgColor: '#2b1b17', navColor: '#3d2b27', accentColor: '#ff9966', textColor: '#ffeaa7', borderColor: '#5d4b47', hoverBg: '#4d3b37', btnBg: '#6d5b57', btnHoverBg: '#ff9966' }
+  };
+
+  function applyTheme(themeName) {
+    const theme = themes[themeName] || themes.christmas; // Default to christmas
+    console.log('🎨 GV Engine: Applying theme:', themeName);
+    
+    const root = document.documentElement;
+    root.style.setProperty('--bgColor', theme.bgColor);
+    root.style.setProperty('--navColor', theme.navColor);
+    root.style.setProperty('--accentColor', theme.accentColor);
+    root.style.setProperty('--textColor', theme.textColor);
+    root.style.setProperty('--borderColor', theme.borderColor);
+    root.style.setProperty('--hoverBg', theme.hoverBg);
+    root.style.setProperty('--btnBg', theme.btnBg);
+    root.style.setProperty('--btnHoverBg', theme.btnHoverBg);
+  }
+
+  function loadThemeFromParent() {
+    try {
+      // Try to get theme from localStorage (same as parent window)
+      const savedTheme = localStorage.getItem('selectedTheme');
+      
+      if (savedTheme) {
+        console.log('🎨 GV Engine: Found saved theme:', savedTheme);
+        applyTheme(savedTheme);
+      } else {
+        console.log('🎨 GV Engine: No saved theme, using Christmas default');
+        applyTheme('christmas');
+      }
+    } catch (error) {
+      console.error('❌ Error loading theme:', error);
+      applyTheme('christmas');
+    }
+  }
+
+  // Apply theme on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadThemeFromParent);
+  } else {
+    loadThemeFromParent();
+  }
+
+  // Listen for storage changes (when theme changes in parent window)
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'selectedTheme' && e.newValue) {
+      console.log('🎨 GV Engine: Theme changed to:', e.newValue);
+      applyTheme(e.newValue);
+    }
+  });
+
+  // Also check for theme updates every second (in case iframe can't detect storage events)
+  let lastTheme = localStorage.getItem('selectedTheme') || 'christmas';
+  setInterval(function() {
+    const currentTheme = localStorage.getItem('selectedTheme') || 'christmas';
+    if (currentTheme !== lastTheme) {
+      console.log('🎨 GV Engine: Theme update detected:', currentTheme);
+      applyTheme(currentTheme);
+      lastTheme = currentTheme;
+    }
+  }, 1000);
+
+})();
+</script>
+
+   </head>
+   <body >
+    <div id="page-container">
+      <div class="content">
+      <div id="header">
+      </div>
+      <div id="content">
+         <h1>GalaxyVerse Search</h1>
+         <form id="uv-form">
+            <input id="uv-search-engine" value="https://search.brave.com/search?q=%s" type="hidden"/> 
+            <input id="uv-address" type="text" placeholder="Type search query or URL" class="form__input"/>
+          </form>
+          <div class="desc left-margin">
+            <p id="uv-error"></p>
+            <pre id="uv-error-code"></pre>
+          </div>
+          <div class="quicksearch">
+            <a class="img" href="/static/embed.html#https://soundcloud.com"><img class="img" src="/others/assets/images/apps/soundcloud.jpg"/></a>
+            <a class="img" href="/static/embed.html#https://google.com"><img class="img" src="/others/assets/images/apps/google.png"/></a>
+             <a class="img" href="/static/embed.html#https://nowgg.fun"><img class="img" src="/others/assets/images/apps/nowgg.png"/></a>
+             <a class="img" href="/static/embed.html#https://twitch.tv/client"><img class="img" src="/others/assets/images/apps/twitch.png"/></a>
+          </div>
+      </div>
+    </div>
+  </div>
+      <script src="/assets/scripts/fade.js"></script>
+      <script src="/static/jmw/jmw.bundle.js" defer></script>
+      <script src="/static/jmw/jmw.config.js" defer></script>
+      <script src="/static/register-sw.js" defer></script>
+      <script src="/static/search.js" defer></script>
+      <script src="/static/index.js" defer></script>
+      <script src="/static/error.js" defer></script>
+      <!--keeping young children safe with this-->
+      <script src="/static/filter.js" defer></script>
+      <!--you're welcome parents-->
+   </body>
+</html>
