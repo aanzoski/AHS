@@ -1,0 +1,474 @@
+<!--Jordan is hella K -->
+<!--Its a joke daddy -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academy High School</title>
+  <script src="assets/js/pre.js" defer></script>
+  <link rel="icon" href="others/assets/images/AHS.png" />
+
+  <!-- external ceeeses -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Sidebar ceeeses -->
+  <link rel="stylesheet" href="./others/assets/css/sidebar.css" />
+
+  <!-- Console ceeeses -->
+  <link rel="stylesheet" href="./others/assets/css/console.css" />
+
+  <!-- Homepage CSS -->
+  <link rel="stylesheet" href="./others/assets/scripts/homepage/css/homepage.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logoforanzoml">⭐</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" id="homeLink" data-page="home" title="Home">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Hσme</span>
+      </a>
+      <a href="#" class="sidebar-link" id="gameLink" data-page="games" title="Games">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+          <polyline points="2 12 22 12"></polyline>
+          <polyline points="7 7 7 22"></polyline>
+          <polyline points="17 7 17 22"></polyline>
+        </svg>
+        <span>Gᾰmes</span>
+      </a>
+      <a href="#" class="sidebar-link" id="searchLink" data-page="search" title="Search">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <span>Search</span>
+      </a>
+      <a href="#" class="sidebar-link" id="appsLink" data-page="apps" title="Shortcuts">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Shortcuts</span>
+      </a>
+      <a href="#" class="sidebar-link" id="settingsLink" data-page="settings" title="Settings">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+          </path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Credits Modal -->
+    <div id="creditsModal" class="info-modal">
+      <div class="info-modal-content">
+        <span class="info-close" data-modal="creditsModal">&times;</span>
+        <h2>Credits</h2>
+        <div class="info-modal-body">
+          <p><strong>Created by:</strong></p>
+          <ul>
+            <li>Aye-zee (aanzoski)</li>
+            <li>Jordan (JustJxrdanWasDefinetlyTaken)</li>
+            <li>Nived (First Developer)</li>
+          </ul>
+
+          <p><strong>Credits</strong></p>
+          <ul>
+            <li><a href="https://www.galaxyverse.org/" target="_blank" rel="noopener noreferrer">GalaxyVerse</a></li>
+            <li><a href="https://github.com/JustJxrdanWasDefinetlyTaken" target="_blank"
+                rel="noopener noreferrer">Jordan's Projects</a></li>
+            <li><a href="https://github.com/3kho" target="_blank" rel="noopener noreferrer">3kho</a></li>
+            <li><a href="https://gn-math.dev/" target="_blank" rel="noopener noreferrer">gn-math for some games</a></li>
+            <li>Vyper Group</li>
+            <li>Velara</li>
+          </ul>
+
+          <p><strong>Contributors:</strong></p>
+          <ul>
+            <li>Michael</li>
+            <li>David</li>
+            <li>Dariel</li>
+            <li>Gemini</li>
+            <li>Ho-luis</li>
+            <li>fabian (ratted)</li>
+          </ul>
+
+          <p><strong>Project Info:</strong></p>
+          <ul>
+            <li>Best development team was here</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update Log Modal -->
+    <div id="updateLogModal" class="info-modal">
+      <div class="info-modal-content">
+        <span class="info-close" data-modal="updateLogModal">&times;</span>
+        <h2>Update Log V5.0.0</h2>
+        <div class="info-modal-body">
+          <ul>
+            <li>NEW: Fingerprint ID Authentication System</li>
+            <li>NEW: Key Generator with special characters</li>
+            <li>CHANGED: Manual key entry required each session</li>
+            <li>14+ New Games</li>
+            <li>Revamped Search</li>
+          </ul>
+
+          <h4><b>Security Features</b></h4>
+          <ul>
+            <li>Browser Fingerprint ID tracking</li>
+            <li>Device-specific authentication</li>
+            <li>Manual key verification each time</li>
+          </ul>
+
+          <h4>Coming Soon</h4>
+          <ul>
+            <li>More games</li>
+            <li>Admin dashboard</li>
+            <li>Custom theme creator</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="content-home" class="content">
+        <!-- Featured Section -->
+        <div class="featured-section">
+          <h2>🎮 Welcome to GalaxyVerse</h2>
+          <p>Discover the best games available</p>
+          <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
+            <b>[Nov 17 2025]</b> NEW AUTH SYSTEM
+          </p>
+        </div>
+
+        <!-- Top Carousel - Scrolling Left to Right -->
+        <div class="carousel-wrapper">
+          <div class="games-carousel">
+            <div class="carousel-track scroll-left-to-right" id="carousel-track-top">
+              <!-- Game cards will be dynamically loaded here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Carousel - Scrolling Right to Left -->
+        <div class="carousel-wrapper">
+          <div class="games-carousel">
+            <div class="carousel-track scroll-right-to-left" id="carousel-track-bottom">
+              <!-- Game cards will be dynamically loaded here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Credits and Update Log buttons -->
+        <div class="homepage-info-buttons">
+          <button id="creditsBtn" class="info-btn">Credits</button>
+          <button id="updateLogBtn" class="info-btn">Update Log</button>
+        </div>
+      </div>
+
+      <div id="content-search" class="content" style="display:none;">
+        <h1>🔍 Search</h1>
+        <div class="search-container" style="margin: 30px auto; max-width: 600px;">
+          <input type="text" id="globalSearchInput" placeholder="Search for games, apps, or content..." style="width: 70%;" />
+          <button id="globalSearchBtn">Search</button>
+        </div>
+        <div id="search-results" class="game-grid" style="margin-top: 40px;">
+          <!-- Search results will appear here -->
+        </div>
+      </div>
+
+      <div id="content-gms" class="content" style="display:none;">
+        <h1>Gᾰmes</h1>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search for games..." />
+          <button id="searchBtn">Search</button>
+        </div>
+        <div id="game-list" class="game-grid">
+          <!-- Game cards will be dynamically loaded here -->
+        </div>
+      </div>
+
+      <div id="content-about" class="content" style="display:none;">
+        <h2>About</h2>
+        <h1>Latest Note: [11/17/25]</h1>
+        <br>
+        <h3>🔐 New Fingerprint ID authentication system!</h3>
+        <h3>🔑 Key generator with special characters</h3>
+        <h3>🛡️ Manual key entry for enhanced security</h3>
+      </div>
+
+      <div id="content-aps" class="content" style="display:none;">
+        <h1>Shortcuts</h1>
+        <div id="app-list" class="app-grid">
+          <!-- App cards will be dynamically loaded here -->
+        </div>
+        <button id="backToHomeApps">Back to Home</button>
+      </div>
+
+      <div id="content-settings" class="content" style="display:none;">
+        <h1>Settings</h1>
+
+        <div class="settings-page-container">
+          <div class="settings-section">
+            <h3>Tab Cloaking</h3>
+            <div class="setting-item">
+              <label for="customTitle">Custom Title:</label>
+              <input type="text" id="customTitle" placeholder="e.g., Google" />
+            </div>
+            <div class="setting-item">
+              <label for="customFavicon">Custom Favicon URL:</label>
+              <input type="text" id="customFavicon" placeholder="e.g., https://google.com/favicon.ico" />
+            </div>
+            <div class="setting-item">
+              <label for="presetSelect">Presets:</label>
+              <select id="presetSelect">
+                <option value="">-- Select Preset --</option>
+                <option value="google">Google</option>
+                <option value="classroom">Google Classroom</option>
+                <option value="bing">Bing</option>
+                <option value="nearpod">Nearpod</option>
+                <option value="powerschool">PowerSchool</option>
+                <option value="chrome">Chrome New Tab</option>
+                <option value="edge">Edge New Tab</option>
+              </select>
+            </div>
+            <div class="setting-buttons">
+              <button id="applyBtn" class="btn-primary">Apply</button>
+              <button id="resetBtn" class="btn-secondary">Reset</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>Theme 🎨</h3>
+            <div class="setting-item">
+              <label for="themeSelect">Select Theme:</label>
+              <select id="themeSelect">
+                <option value="original">Original (Dark Blue)</option>
+                <option value="dark">Dark Theme</option>
+                <option value="light">Light Theme</option>
+                <option value="midnight">Midnight</option>
+                <option value="ocean">Ocean</option>
+                <option value="sunset">Sunset</option>
+                <option value="forest">Forest</option>
+                <option value="purple">Purple Dream</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="matrix">Matrix</option>
+                <option value="neon">Neon Lights</option>
+                <option value="fire">Fire</option>
+                <option value="ice">Ice</option>
+                <option value="retro">Retro</option>
+              </select>
+            </div>
+            <p style="font-size: 12px; color: var(--text-color); opacity: 0.8; margin-top: 8px;">
+              ✨ Sidebar colors automatically match your selected theme!
+            </p>
+            <div class="setting-item">
+              <label>
+                <input type="checkbox" id="snowToggle" checked /> Enable Snow Effect
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>Panic Button</h3>
+            <div class="setting-item">
+              <label for="hotkey-input">Panic Hotkey:</label>
+              <input type="text" id="hotkey-input" placeholder="Press a key" readonly />
+              <button id="change-hotkey-btn" class="btn-small">Change</button>
+            </div>
+            <div class="setting-item">
+              <label for="redirect-url-input">Redirect URL:</label>
+              <input type="text" id="redirect-url-input" placeholder="https://google.com" />
+              <button id="change-URL-btn" class="btn-small">Change</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>About Blank</h3>
+            <div class="setting-item">
+              <label>
+                <input type="checkbox" id="aboutBlankToggle" /> Enable About:Blank Cloaking
+              </label>
+              <p style="font-size: 12px; color: var(--text-color); margin-top: 8px; opacity: 0.8;">
+                When enabled, the site will open in an about:blank window to hide from browser history.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="game-display" class="content" style="display:none;">
+        <div class="game-play-area" id="game-play-area">
+          <button class="fullscreen-btn" id="fullscreenBtn">Fullscreen</button>
+          <iframe id="game-iframe" class="game-iframe" title="Game Display"></iframe>
+        </div>
+        <br />
+        <button id="backToHomeGame">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Snow container -->
+  <div id="snow-container"></div>
+
+  <!-- Firebase SDK - MUST BE IN THIS ORDER -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <!-- CRITICAL: Load scripts in EXACT ORDER -->
+  <!-- 1. Console system -->
+  <script src="others/assets/scripts/console.js"></script>
+
+  <!-- 3. Games data -->
+  <script src="others/assets/scripts/gms.js"></script>
+
+  <!-- 4. Stats tracking -->
+  <script src="others/assets/scripts/stats.js"></script>
+
+  <!-- 4.5 NIMDA -->
+  <script src="others/assets/scripts/admin.js"></script>
+  
+  <!-- 5. Sidebar navigation -->
+  <script src="others/assets/js/sidebar.js"></script>
+
+  <!-- 6. Main scripts (with Fingerprint ID protection integrated) -->
+  <script src="scripts.js"></script>
+
+  <!-- Homepage scroll functionality -->
+  <script src="others/assets/scripts/homepage/homescroll.js"></script>
+
+  <!-- Debug helper -->
+  <script>
+    console.log('Page loaded, checking for games data...');
+    setTimeout(() => {
+      console.log('Games available:', typeof games !== 'undefined' ? games.length : 'NOT LOADED');
+      console.log('Carousel tracks found:', {
+        top: !!document.getElementById('carousel-track-top'),
+        bottom: !!document.getElementById('carousel-track-bottom')
+      });
+    }, 2000);
+  </script>
+
+  <!-- Global search functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const globalSearchBtn = document.getElementById('globalSearchBtn');
+      const globalSearchInput = document.getElementById('globalSearchInput');
+      const searchResults = document.getElementById('search-results');
+
+      function performGlobalSearch() {
+        const query = globalSearchInput.value.toLowerCase().trim();
+        if (!query) {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">Enter a search term to begin</p>';
+          return;
+        }
+
+        if (typeof games === 'undefined') {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">Loading games data...</p>';
+          return;
+        }
+
+        const results = games.filter(game => 
+          game.name.toLowerCase().includes(query) ||
+          (game.description && game.description.toLowerCase().includes(query))
+        );
+
+        if (results.length === 0) {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">No results found</p>';
+          return;
+        }
+
+        searchResults.innerHTML = results.map(game => `
+          <div class="game-card" data-game-id="${game.id}">
+            <img src="${game.image}" alt="${game.name}">
+            <h3>${game.name}</h3>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('#search-results .game-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const gameId = this.getAttribute('data-game-id');
+            if (typeof loadGame === 'function') {
+              loadGame(gameId);
+            }
+          });
+        });
+      }
+
+      if (globalSearchBtn && globalSearchInput) {
+        globalSearchBtn.addEventListener('click', performGlobalSearch);
+        globalSearchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            performGlobalSearch();
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- Iframe control functions -->
+  <script>
+    function reload() {
+      var iframe = document.querySelector("iframe");
+      if (iframe) {
+        try {
+          iframe.contentWindow.location.reload(true);
+        } catch (error) {
+          console.log('Reloading iframe via src...', error);
+          iframe.src = iframe.src;
+        }
+      } else {
+        console.warn('No iframe found to reload');
+      }
+    }
+
+    function historyBack() {
+      var iframe = document.querySelector("iframe");
+      if (iframe) {
+        try {
+          iframe.contentWindow.history.back();
+        } catch (error) {
+          console.warn('Cannot navigate back in iframe:', error);
+        }
+      }
+    }
+
+    function historyForward() {
+      var iframe = document.querySelector("iframe");
+      if (iframe) {
+        try {
+          iframe.contentWindow.history.forward();
+        } catch (error) {
+          console.warn('Cannot navigate forward in iframe:', error);
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>
