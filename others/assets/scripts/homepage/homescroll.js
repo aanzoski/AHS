@@ -2,85 +2,113 @@
 (function() {
   'use strict';
 
+  console.log('🎮 Carousel script loaded');
+
   let gamesLoaded = false;
   let retryCount = 0;
-  const MAX_RETRIES = 10;
+  const MAX_RETRIES = 30;
 
   // Initialize carousels when DOM is ready
   function initCarousels() {
-    if (typeof games === 'undefined' || !games || games.length === 0) {
+    console.log(`🔄 InitCarousels called, retry: ${retryCount}/${MAX_RETRIES}`);
+    
+    // Check if carousel tracks exist
+    const trackTop = document.getElementById('carousel-track-top');
+    const trackBottom = document.getElementById('carousel-track-bottom');
+    
+    if (!trackTop || !trackBottom) {
+      console.warn('⚠️ Carousel tracks not found in DOM yet');
       if (retryCount < MAX_RETRIES) {
         retryCount++;
-        console.log(`Waiting for games data... Retry ${retryCount}/${MAX_RETRIES}`);
-        setTimeout(initCarousels, 500);
-        return;
-      } else {
-        console.error('Games data not available after maximum retries');
-        loadPlaceholderGames();
+        setTimeout(initCarousels, 200);
         return;
       }
+      console.error('❌ Carousel tracks never appeared');
+      return;
     }
 
-    console.log('Loading games into carousels...');
-    loadTopCarousel();
-    loadBottomCarousel();
+    console.log('✅ Carousel tracks found');
+
+    // Check for games data
+    let gamesToUse = [];
+    
+    if (typeof games !== 'undefined' && games && games.length > 0) {
+      console.log(`✅ Found ${games.length} games from games array`);
+      // Filter out Feedback
+      gamesToUse = games.filter(game => game.name !== "Feedback");
+      console.log(`✅ Using ${gamesToUse.length} playable games`);
+    } else if (typeof window.games !== 'undefined' && window.games && window.games.length > 0) {
+      console.log(`✅ Found ${window.games.length} games from window.games`);
+      gamesToUse = window.games.filter(game => game.name !== "Feedback");
+    } else {
+      console.warn('⚠️ No games data found, retrying...');
+      if (retryCount < MAX_RETRIES) {
+        retryCount++;
+        setTimeout(initCarousels, 200);
+        return;
+      }
+      console.error('❌ Games data never loaded');
+      return;
+    }
+
+    if (gamesToUse.length === 0) {
+      console.error('❌ No playable games found');
+      return;
+    }
+
+    console.log('🎯 Loading carousels with', gamesToUse.length, 'games');
+    loadTopCarousel(gamesToUse);
+    loadBottomCarousel(gamesToUse);
     gamesLoaded = true;
+    console.log('✅ Carousels loaded successfully');
   }
 
   // Load games into top carousel (left to right)
-  function loadTopCarousel() {
+  function loadTopCarousel(gamesToUse) {
     const trackTop = document.getElementById('carousel-track-top');
-    if (!trackTop) {
-      console.error('Top carousel track not found');
-      return;
-    }
+    if (!trackTop) return;
 
-    // Shuffle games for variety
-    const shuffledGames = [...games].sort(() => Math.random() - 0.5);
+    // Shuffle and take first 15 games
+    const shuffled = [...gamesToUse].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(15, gamesToUse.length));
     
-    // Take first 15 games and duplicate them for seamless loop
-    const gamesToShow = shuffledGames.slice(0, 15);
-    const duplicatedGames = [...gamesToShow, ...gamesToShow];
+    // Duplicate for seamless loop
+    const duplicated = [...selected, ...selected];
 
-    trackTop.innerHTML = duplicatedGames.map(game => createGameCard(game)).join('');
+    trackTop.innerHTML = duplicated.map(game => createGameCard(game)).join('');
     addClickHandlers(trackTop);
+    
+    console.log(`✅ Top carousel loaded with ${duplicated.length} cards`);
   }
 
   // Load games into bottom carousel (right to left)
-  function loadBottomCarousel() {
+  function loadBottomCarousel(gamesToUse) {
     const trackBottom = document.getElementById('carousel-track-bottom');
-    if (!trackBottom) {
-      console.error('Bottom carousel track not found');
-      return;
-    }
+    if (!trackBottom) return;
 
-    // Shuffle games differently from top carousel
-    const shuffledGames = [...games].sort(() => Math.random() - 0.5);
+    // Shuffle differently and take different games
+    const shuffled = [...gamesToUse].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(15, gamesToUse.length));
     
-    // Take different set of games
-    const gamesToShow = shuffledGames.slice(15, 30);
-    
-    // If not enough games, use from the start
-    if (gamesToShow.length < 15) {
-      const remaining = 15 - gamesToShow.length;
-      gamesToShow.push(...shuffledGames.slice(0, remaining));
-    }
-    
-    const duplicatedGames = [...gamesToShow, ...gamesToShow];
+    // Duplicate for seamless loop
+    const duplicated = [...selected, ...selected];
 
-    trackBottom.innerHTML = duplicatedGames.map(game => createGameCard(game)).join('');
+    trackBottom.innerHTML = duplicated.map(game => createGameCard(game)).join('');
     addClickHandlers(trackBottom);
+    
+    console.log(`✅ Bottom carousel loaded with ${duplicated.length} cards`);
   }
 
   // Create a game card HTML
   function createGameCard(game) {
+    // Handle your data structure: image and url properties
     const gameImage = game.image || 'others/assets/images/placeholder.png';
     const gameName = game.name || 'Unknown Game';
-    const gameId = game.id || '';
+    const gameUrl = game.url || '';
 
     return `
-      <div class="carousel-game-card" data-game-id="${gameId}">
-        <img src="${gameImage}" alt="${gameName}" draggable="false" loading="lazy">
+      <div class="carousel-game-card" data-game-url="${gameUrl}" data-game-name="${gameName}" title="${gameName}">
+        <img src="${gameImage}" alt="${gameName}" draggable="false" loading="lazy" onerror="this.src='others/assets/images/placeholder.png'">
         <h3>${gameName}</h3>
       </div>
     `;
@@ -92,57 +120,62 @@
     cards.forEach(card => {
       card.addEventListener('click', function(e) {
         e.preventDefault();
-        const gameId = this.getAttribute('data-game-id');
+        const gameUrl = this.getAttribute('data-game-url');
+        const gameName = this.getAttribute('data-game-name');
         
-        if (gameId && typeof loadGame === 'function') {
-          console.log(`Loading game: ${gameId}`);
-          loadGame(gameId);
+        console.log(`🎮 Clicked game: ${gameName}`);
+        
+        if (gameUrl) {
+          // Try to use your existing loadGame function if it exists
+          if (typeof loadGame === 'function') {
+            // Find the game object from the games array
+            const gameObj = games.find(g => g.url === gameUrl);
+            if (gameObj) {
+              loadGame(gameObj);
+            } else {
+              // Fallback: load directly
+              loadGameByUrl(gameUrl, gameName);
+            }
+          } else {
+            // Fallback: load directly
+            loadGameByUrl(gameUrl, gameName);
+          }
         } else {
-          console.warn('Game ID not found or loadGame function not available');
+          console.warn('⚠️ No URL found for game:', gameName);
         }
       });
     });
   }
 
-  // Load placeholder games if real data isn't available
-  function loadPlaceholderGames() {
-    console.warn('Loading placeholder games');
+  // Fallback function to load game by URL
+  function loadGameByUrl(url, name) {
+    console.log(`Loading game: ${name} from ${url}`);
     
-    const placeholders = Array(15).fill(null).map((_, i) => ({
-      id: `placeholder-${i}`,
-      name: `Game ${i + 1}`,
-      image: 'others/assets/images/placeholder.png'
-    }));
-
-    const trackTop = document.getElementById('carousel-track-top');
-    const trackBottom = document.getElementById('carousel-track-bottom');
-
-    if (trackTop) {
-      const duplicated = [...placeholders, ...placeholders];
-      trackTop.innerHTML = duplicated.map(game => createGameCard(game)).join('');
+    // Check if it's a Google Form (Feedback)
+    if (url.includes('forms.gle') || url.includes('google.com/forms')) {
+      window.open(url, '_blank');
+      return;
     }
-
-    if (trackBottom) {
-      const duplicated = [...placeholders, ...placeholders];
-      trackBottom.innerHTML = duplicated.map(game => createGameCard(game)).join('');
-    }
-  }
-
-  // Adjust animation speed based on number of games
-  function adjustAnimationSpeed() {
-    const trackTop = document.getElementById('carousel-track-top');
-    const trackBottom = document.getElementById('carousel-track-bottom');
-
-    if (trackTop && trackTop.children.length > 0) {
-      const cardCount = trackTop.children.length / 2; // Divided by 2 because duplicated
-      const duration = Math.max(20, cardCount * 2.5); // At least 20s
-      trackTop.style.animationDuration = `${duration}s`;
-    }
-
-    if (trackBottom && trackBottom.children.length > 0) {
-      const cardCount = trackBottom.children.length / 2;
-      const duration = Math.max(20, cardCount * 2.5);
-      trackBottom.style.animationDuration = `${duration}s`;
+    
+    // Try to use existing game display system
+    const gameDisplay = document.getElementById('game-display');
+    const gameIframe = document.getElementById('game-iframe');
+    
+    if (gameDisplay && gameIframe) {
+      // Hide all content sections
+      document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+      });
+      
+      // Show game display
+      gameDisplay.style.display = 'block';
+      gameIframe.src = url;
+      
+      console.log('✅ Game loaded in iframe');
+    } else {
+      // Fallback: open in new tab
+      console.warn('⚠️ Game display not found, opening in new tab');
+      window.open(url, '_blank');
     }
   }
 
@@ -164,9 +197,11 @@
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
+      console.log('📄 DOM Content Loaded');
       setTimeout(initCarousels, 100);
     });
   } else {
+    console.log('📄 DOM already loaded');
     setTimeout(initCarousels, 100);
   }
 
@@ -175,17 +210,16 @@
 
   // Expose reload function for external use
   window.reloadHomeCarousels = function() {
-    if (gamesLoaded) {
-      console.log('Reloading carousels...');
-      loadTopCarousel();
-      loadBottomCarousel();
-      adjustAnimationSpeed();
+    console.log('🔄 Reloading carousels...');
+    if (typeof games !== 'undefined' && games && games.length > 0) {
+      const gamesToUse = games.filter(game => game.name !== "Feedback");
+      loadTopCarousel(gamesToUse);
+      loadBottomCarousel(gamesToUse);
     } else {
       initCarousels();
     }
   };
 
-  // Adjust animation speed after initial load
-  setTimeout(adjustAnimationSpeed, 1000);
+  console.log('🎮 Carousel script initialization complete');
 
 })();
