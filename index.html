@@ -24,94 +24,141 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet" />
 
   <style>
-    /* Game of the Day Styles */
-    #game-of-the-day-container {
-      margin: 30px auto;
-      max-width: 400px;
+    /* Game Carousel Styles */
+    .games-carousel-section {
+      margin: 40px auto;
+      max-width: 1400px;
+      padding: 0 20px;
     }
 
-    .gotd-card {
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .carousel-header h2 {
+      color: var(--accent-color);
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .carousel-btn {
+      background: var(--nav-color);
+      border: 2px solid var(--accent-color);
+      color: var(--text-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    .games-carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-game-card {
+      min-width: 250px;
+      height: 250px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      background-color: #000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .carousel-game-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(79, 144, 255, 0.5);
+    }
+
+    .carousel-game-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .carousel-game-card h3 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 15px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+      color: #fff;
+      font-size: 1em;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* Featured Section */
+    .featured-section {
       background: var(--nav-color);
       border: 2px solid var(--accent-color);
       border-radius: 15px;
-      padding: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 1200px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
 
-    .gotd-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(79, 144, 255, 0.4);
+    .featured-section h2 {
+      color: var(--accent-color);
+      font-size: 32px;
+      margin-bottom: 20px;
     }
 
-    .gotd-badge {
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      color: #000;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 15px;
-      font-size: 14px;
-      box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-
-    .gotd-card img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      margin: 15px auto;
-      display: block;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .gotd-card h3 {
+    .featured-section p {
       color: var(--text-color);
-      font-size: 24px;
-      margin: 15px 0;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
-    .gotd-play-btn {
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
+    /* Auto-scroll animation */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
-    .gotd-play-btn:hover {
-      background: var(--btn-hover-bg);
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(79, 144, 255, 0.5);
+    .carousel-track.auto-scroll {
+      animation: scroll 30s linear infinite;
     }
 
-    /* Proxy Frame */
-    .poxyframe {
-      width: 100%;
-      height: 100vh;
-      margin: 20px 0;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    .carousel-track.auto-scroll:hover {
+      animation-play-state: paused;
     }
   </style>
 </head>
@@ -139,6 +186,13 @@
           <polyline points="17 7 17 22"></polyline>
         </svg>
         <span>Gᾰmes</span>
+      </a>
+      <a href="#" class="sidebar-link" id="searchLink" data-page="search" title="Search">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <span>Search</span>
       </a>
       <a href="#" class="sidebar-link" id="appsLink" data-page="apps" title="Shortcuts">
         <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -241,15 +295,43 @@
         <h1>Welcome to GalaxyVerse</h1>
         <h2>[Nov 17 2025] <b>NEW AUTH SYSTEM</b></h2>
 
-        <div class="poxyframe">
-          <iframe src="/static/" style="width:100%; height:100vh; border:none;" title="GV Engine Frame" id="searchFrame">
-          </iframe>
+        <!-- Featured Section -->
+        <div class="featured-section">
+          <h2>🎮 Featured Games</h2>
+          <p>Discover the best games available on GalaxyVerse</p>
+        </div>
+
+        <!-- Games Carousel -->
+        <div class="games-carousel-section">
+          <div class="carousel-header">
+            <h2>Popular Games</h2>
+            <div class="carousel-controls">
+              <button class="carousel-btn" id="carousel-prev">‹</button>
+              <button class="carousel-btn" id="carousel-next">›</button>
+            </div>
+          </div>
+          <div class="games-carousel">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Game cards will be dynamically loaded here -->
+            </div>
+          </div>
         </div>
 
         <!-- Credits and Update Log buttons -->
         <div class="homepage-info-buttons">
           <button id="creditsBtn" class="info-btn">Credits</button>
           <button id="updateLogBtn" class="info-btn">Update Log</button>
+        </div>
+      </div>
+
+      <div id="content-search" class="content" style="display:none;">
+        <h1>🔍 Search</h1>
+        <div class="search-container" style="margin: 30px auto; max-width: 600px;">
+          <input type="text" id="globalSearchInput" placeholder="Search for games, apps, or content..." style="width: 70%;" />
+          <button id="globalSearchBtn">Search</button>
+        </div>
+        <div id="search-results" class="game-grid" style="margin-top: 40px;">
+          <!-- Search results will appear here -->
         </div>
       </div>
 
@@ -409,6 +491,126 @@
 
   <!-- 6. Main scripts (with Fingerprint ID protection integrated) -->
   <script src="scripts.js"></script>
+
+  <!-- Carousel functionality -->
+  <script>
+    // Carousel functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.getElementById('carousel-track');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      let currentIndex = 0;
+      const cardWidth = 270; // 250px + 20px gap
+
+      // Load games into carousel
+      function loadCarouselGames() {
+        if (typeof games === 'undefined') {
+          console.warn('Games data not loaded yet');
+          return;
+        }
+
+        // Duplicate games for infinite scroll effect
+        const gamesToShow = [...games, ...games].slice(0, 20);
+        
+        track.innerHTML = gamesToShow.map(game => `
+          <div class="carousel-game-card" data-game-id="${game.id}">
+            <img src="${game.image}" alt="${game.name}" draggable="false">
+            <h3>${game.name}</h3>
+          </div>
+        `).join('');
+
+        // Add click handlers
+        document.querySelectorAll('.carousel-game-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const gameId = this.getAttribute('data-game-id');
+            if (typeof loadGame === 'function') {
+              loadGame(gameId);
+            }
+          });
+        });
+      }
+
+      // Navigation
+      function updateCarousel() {
+        const offset = -currentIndex * cardWidth;
+        track.style.transform = `translateX(${offset}px)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const maxIndex = track.children.length - Math.floor(track.parentElement.offsetWidth / cardWidth);
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      // Load games when available
+      if (typeof games !== 'undefined') {
+        loadCarouselGames();
+      } else {
+        setTimeout(loadCarouselGames, 1000);
+      }
+
+      // Global search functionality
+      const globalSearchBtn = document.getElementById('globalSearchBtn');
+      const globalSearchInput = document.getElementById('globalSearchInput');
+      const searchResults = document.getElementById('search-results');
+
+      function performGlobalSearch() {
+        const query = globalSearchInput.value.toLowerCase().trim();
+        if (!query) {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">Enter a search term to begin</p>';
+          return;
+        }
+
+        if (typeof games === 'undefined') {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">Loading games data...</p>';
+          return;
+        }
+
+        const results = games.filter(game => 
+          game.name.toLowerCase().includes(query) ||
+          (game.description && game.description.toLowerCase().includes(query))
+        );
+
+        if (results.length === 0) {
+          searchResults.innerHTML = '<p style="color: var(--text-color); text-align: center;">No results found</p>';
+          return;
+        }
+
+        searchResults.innerHTML = results.map(game => `
+          <div class="game-card" data-game-id="${game.id}">
+            <img src="${game.image}" alt="${game.name}">
+            <h3>${game.name}</h3>
+          </div>
+        `).join('');
+
+        // Add click handlers
+        document.querySelectorAll('#search-results .game-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const gameId = this.getAttribute('data-game-id');
+            if (typeof loadGame === 'function') {
+              loadGame(gameId);
+            }
+          });
+        });
+      }
+
+      globalSearchBtn.addEventListener('click', performGlobalSearch);
+      globalSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performGlobalSearch();
+        }
+      });
+    });
+  </script>
 
   <!-- Iframe control functions -->
   <script>
