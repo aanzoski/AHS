@@ -100,15 +100,15 @@ const games = [
 
 // ===== APP DATA =====
 const apps = [
-  { name: "AI", image: "others/assets/images/apps/chippytea.png", url: "others/assets/apps/clai.html" },
-  { name: "EmulatorJS", image: "others/assets/images/apps/emulatorjs.png", url: "others/assets/apps/clemujs.html" },
-  { name: "Ruffle", image: "others/assets/images/apps/ruffle.png", url: "others/assets/apps/clruffle.html" },
-  { name: "Sandstone", image: "others/assets/images/apps/sandstone.jpg", url: "others/assets/apps/sandstone.html" },
-  { name: "Silk", image: "others/assets/images/apps/silk.jpg", url: "others/assets/apps/clsilk.html" },
-  { name: "Soundcloud", image: "others/assets/images/apps/soundcloud.png", url: "others/assets/apps/soundcloud.html" },
-  { name: "Vscode", image: "others/assets/images/apps/vscode.jpeg", url: "others/assets/apps/vscode.html" },
-  { name: "YouTube", image: "/others/assets/images/apps/youtube.png", url: "/others/assets/apps/yt.html"},
-  { name: "Spotify (SOON)", image: "/others/assets/images/apps/spotify.png", url: "about:blank"}, 
+  { name: "AI", image: "others/assets/apps/images/chippytea.png", url: "others/assets/apps/clsilk (1).html" },
+  { name: "EmulatorJS", image: "others/assets/apps/images/emulatorjs.png", url: "others/assets/apps/clemujs (1).html" },
+  { name: "Ruffle", image: "others/assets/apps/images/ruffle.png", url: "others/assets/apps/clruffle.html" },
+  { name: "Sandstone", image: "others/assets/apps/images/sandstone.jpg", url: "others/assets/apps/sandstone.html" },
+  { name: "Silk", image: "others/assets/apps/images/silk.jpg", url: "others/assets/apps/clsilk.html" },
+  { name: "Soundcloud", image: "others/assets/apps/images/soundcloud.png", url: "others/assets/apps/soundcloud (1).html" },
+  { name: "Vscode", image: "others/assets/apps/images/vscode.jpeg", url: "others/assets/apps/vscode.html" },
+  { name: "YouTube", image: "/others/assets/apps/images/youtube.png", url: "/others/assets/apps/yt.html"},
+  { name: "Spotify (SOON)", image: "/others/assets/apps/images/spotify.png", url: "about:blank"}, 
 ];
 
 // ===== WEBSITES DATA - GALAXYVERSE NETWORK =====
