@@ -97,13 +97,16 @@ const games = [
   // S
   { name: "Sandtris", image: "others/assets/games/images/sandtris.png", url: "others/assets/games/Sandtris.html" },
   { name: "SAS: Zombie Assault 2", image: "others/assets/games/images/sas2.jpeg", url: "others/assets/games/clsaszombieassault2.html" },
+  { name: "Skibidi Shooter", image: "others/assets/games/images/skibidishooter.jpg", url: "others/assets/games/skibidishooter.html" },
   { name: "Slither.io", image: "others/assets/games/images/slitherio.png", url: "others/assets/games/Slither.io.html" },
   { name: "Slope", image: "others/assets/games/images/slope.png", url: "others/assets/games/Slope.html" },
   { name: "Slope 2", image: "others/assets/games/images/slope2.png", url: "others/assets/games/slope2player.html" },
   { name: "Slow Roads", image: "others/assets/games/images/Slow-Roads.webp", url: "others/assets/games/Slowroads.html" },
   { name: "Smash Karts", image: "others/assets/games/images/smash karts.webp", url: "others/assets/games/smashkartsworking.html" },
+  { name: "Sniper Shot", image: "others/assets/games/images/snipershot.png", url: "others/assets/games/snipershot.html" },
   { name: "Solar Smash", image: "others/assets/games/images/Solar_smash.webp", url: "others/assets/games/Solar Smash.html" },
   { name: "Soccer Bros", image: "others/assets/games/images/Soccer-Bros-Unblocked.webp", url: "others/assets/games/soccerbros.html" },
+  { name: "Sonix.exe OG", image: "others/assets/games/images/sonicexe.jpg", url: "others/assets/games/soniceexeog.html" },
   { name: "Space Waves", image: "others/assets/games/images/spacewaves.png", url: "others/assets/games/Space Waves.html" },
   { name: "Steal a Brainrot 1", image: "others/assets/games/images/stealabrain.webp", url: "others/assets/games/Steal Brainrot Online UPD1.html" },
   { name: "Steal a Brainrot 2", image: "others/assets/games/images/steal a brainrot.png", url: "others/assets/games/brainrot.html" },
@@ -115,13 +118,28 @@ const games = [
   { name: "Subway Surfers San Francisco", image: "others/assets/games/images/subwaysanfran.jpeg", url: "others/assets/games/Subway Surfers_ San Francisco.html" },
   { name: "Subway Surfers Winter Holiday", image: "others/assets/games/images/subway-surfers.jpg", url: "others/assets/games/Subway Surfers_ Winter Holiday.html" },
   // T
+  { name: "The Visitor", image: "others/assets/games/images/thevisitor.jpg", url: "others/assets/games/the visitor.html" },
   { name: "Temple Run 2", image: "others/assets/games/images/temple run 2.png", url: "others/assets/games/Temple Run 2.html" },
   { name: "Territorial.io", image: "others/assets/games/images/territorial.io.png", url: "others/assets/games/territorial.io.html" },
   { name: "Tomb Of The Mask", image: "others/assets/games/images/tomb of the mask.png", url: "others/assets/games/Tomb Of The Mask.html" },
+  { name: "Traffic Jam 3d", image: "others/assets/games/images/traffic-jam-3d.jpeg", url: "others/assets/games/trafficjam3d.html" },
   { name: "Tube Jumpers", image: "others/assets/games/images/tubejumpers.jpg", url: "others/assets/games/Tube Jumpers.html" },
+  // U
+  { name: "Ultimate car driving simulator", image: "others/assets/games/images/Ultimate car driving simulator.png", url: "others/assets/games/Ultimate car driving simulator.html" },
+  { name: "Uno", image: "others/assets/games/images/uno.png", url: "others/assets/games/uno.html" },
+  // V
+  { name: "Volley Random", image: "others/assets/games/images/volleyrandom.png", url: "others/assets/games/volleyrandom.html" },
   // W
   { name: "We Become What We Behold", image: "others/assets/games/images/webecomewhatwebehold.png", url: "others/assets/games/webecomewhatwebehold.html" },
-  { name: "Wrestle Bros", image: "others/assets/games/images/wrestlebros.png", url: "others/assets/games/wrestlebros.html" }
+  { name: "Wordle", image: "others/assets/games/images/wordle.webp", url: "others/assets/games/wordle.html" },
+  { name: "Wrestle Bros", image: "others/assets/games/images/wrestlebros.png", url: "others/assets/games/wrestlebros.html" },
+  // X
+//{ name: "You vs 100 Skibidi", image: "others/assets/games/images/you-vs-100-skibidi-toilets-cover.avif", url: "others/assets/games/youvs100skibidi.html" },
+  // Y
+  { name: "You vs 100 Skibidi", image: "others/assets/games/images/you-vs-100-skibidi-toilets-cover.avif", url: "others/assets/games/youvs100skibidi.html" },
+  // Z
+  { name: "Zombie Road", image: "others/assets/games/images/you-vs-100-skibidi-toilets-cover.avif", url: "others/assets/games/zombieroad.html" },
+  { name: "Zombie Rush", image: "others/assets/games/images/you-vs-100-skibidi-toilets-cover.avif", url: "others/assets/games/zombierush.html" }
 ];
 
 // ===== APP DATA =====
