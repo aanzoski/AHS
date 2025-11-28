@@ -73,6 +73,7 @@ const games = [
   { name: "Pou", image: "others/assets/games/images/pou.png", url: "others/assets/games/pou.html" },
   { name: "Ragdoll Archers", image: "others/assets/games/images/RagdollArchers.jpg", url: "others/assets/games/ragdollarchers.html" },
   { name: "Rainbow Obby", image: "others/assets/games/images/rainbowobby.png", url: "others/assets/games/Rainbow Obby.html" },
+  { name: "Retro Highway", image: "others/assets/games/images/retrohighway.jpg", url: "others/assets/games/retrohighway.html" },
   { name: "Retro Bowl", image: "others/assets/games/images/retro-bowl.jpeg", url: "others/assets/games/Retro Bowl.html" },
   { name: "Retro Bowl College", image: "others/assets/games/images/retrobrowlcollege.jpg", url: "others/assets/games/Retro Bowl College.html" },
   { name: "Rooftop Snipers", image: "others/assets/games/images/rooftopsnipers.jpg", url: "others/assets/games/Rooftop Snipers.html" },
