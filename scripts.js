@@ -1,889 +1,1029 @@
-// Wait for console to be ready before proceeding
-if (window.GVerseConsole && !window.GVerseConsole.initialized) {
-  console.log('⏳ Waiting for console initialization...');
-  const waitForConsole = setInterval(() => {
-    if (window.GVerseConsole.initialized) {
-      clearInterval(waitForConsole);
-      console.log('✅ Console ready, continuing scripts.js initialization');
-    }
-  }, 50);
+/* Modern Relic Stylesheet v7.0 - Enhanced Color Scheme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Enhanced Color Palette */
+  --bg-color: #0f172a;
+  --bg-secondary: #1e293b;
+  --nav-color: #1e1b4b;
+  --accent-color: #7c3aed;
+  --accent-secondary: #a78bfa;
+  --accent-tertiary: #4f46e5;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --hover-bg: #2e3a58;
+  --btn-bg: #334155;
+  --btn-hover-bg: #4f46e5;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  
+  /* Enhanced Glassmorphism */
+  --glass-bg: rgba(30, 41, 59, 0.8);
+  --glass-border: rgba(124, 58, 237, 0.25);
+  --glass-blur: blur(12px);
+  
+  /* Improved Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 25px rgba(124, 58, 237, 0.4);
+  
+  /* Sidebar */
+  --sidebar-top: #1e1b4b;
+  --sidebar-mid: #1e1b4b;
+  --sidebar-bottom: #1e1b4b;
+  --sidebar-text: rgba(248, 250, 252, 0.9);
+  --sidebar-text-hover: #ffffff;
+  --sidebar-hover: rgba(167, 139, 250, 0.2);
+  --sidebar-active-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(79, 70, 229, 0.35) 100%);
+  --sidebar-accent-border: linear-gradient(180deg, #7c3aed 0%, #4f46e5 100%);
+  
+  /* Transitions */
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-// ===== CONSOLE INTEGRATION =====
-console.log('📦 Loading scripts.js...');
-console.log('🔍 Checking console status:', window.GVerseConsole ? 'Available' : 'Not loaded');
-
-// ===== ALLOWED DOMAINS FOR AUTO-REDIRECT =====
-const ALLOWED_DOMAINS = [
-  'ahs.schoologydashboard.org.cdn.cloudflare.net',
-  'learn.schoologydashboard.org.cdn.cloudflare.net',
-  'gverse.schoologydashboard.org.cdn.cloudflare.net',
-  'schoologydashboard.org',
-  'galaxyverse-c1v.pages.dev',
-  'www.galaxyverse.org',
-  'galaxyverse.org',
-  'schoologycourses.org'
-];
-
-// ===== CHECK IF ON ALLOWED DOMAIN =====
-function isOnAllowedDomain() {
-  const hostname = window.location.hostname.toLowerCase();
-  return ALLOWED_DOMAINS.some(domain => hostname.includes(domain.replace('www.', '')));
+/* Base Styles */
+* {
+  box-sizing: border-box;
 }
 
-// ===== SEASONAL THEME SYSTEM (BUILT-IN) =====
-function getSeasonalTheme() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const day = now.getDate();
-  
-  if (year === 2025 && month === 9 && day >= 27 && day <= 30) {
-    console.log('🎃 Halloween season detected!');
-    return 'halloween';
-  }
-  
-  if (year === 2025 && ((month === 10 && day >= 1) || month === 11)) {
-    console.log('🎄 Christmas season detected!');
-    return 'christmas';
-  }
-  
-  if (year >= 2026) {
-    console.log('✨ Default season');
-    return 'original';
-  }
-  
-  return 'original';
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-function shouldAutoApplySeasonalTheme() {
-  const autoApply = localStorage.getItem('autoApplySeasonalThemes');
-  return autoApply !== 'false';
+/* Enhanced Animated Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 40%);
+  z-index: -1;
+  animation: backgroundPulse 20s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
-// ===== ABOUT:BLANK CLOAKING =====
-(function() {
-  const aboutBlankEnabled = localStorage.getItem('aboutBlank');
-  const isInAboutBlank = window.self !== window.top;
-  
-  if (aboutBlankEnabled === 'enabled' && !isInAboutBlank) {
-    console.log('🔒 About:blank cloaking enabled');
-    const currentURL = window.location.href;
-    const win = window.open('about:blank', '_blank');
-    
-    if (win) {
-      win.document.open();
-      win.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>New Tab</title>
-          <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-        </head>
-        <body style="margin:0;padding:0;overflow:hidden;">
-          <iframe src="${currentURL}" style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
-        </body>
-        </html>
-      `);
-      win.document.close();
-      window.location.replace('about:blank');
-      window.close();
-    }
-  }
-})();
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
 
-// ===== TAB CLOAKING PRESETS =====
-const presets = {
-  google: { title: "Google", favicon: "https://www.google.com/favicon.ico" },
-  classroom: { title: "Home", favicon: "https://ssl.gstatic.com/classroom/favicon.png" },
-  bing: { title: "Bing", favicon: "https://bing.com/favicon.ico" },
-  nearpod: { title: "Nearpod", favicon: "https://nearpod.com/favicon.ico" },
-  powerschool: { title: "PowerSchool Sign In", favicon: "https://powerschool.com/favicon.ico" },
-  edge: { title: "New Tab", favicon: "https://www.bing.com/favicon.ico" },
-  chrome: { title: "New Tab", favicon: "https://www.google.com/favicon.ico" }
-};
+/* Snow container */
+#snow-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  overflow: hidden;
+}
 
-// ===== THEME CONFIGURATIONS =====
-const themes = {
-  original: { bgColor: '#121826', navColor: '#1e2433', accentColor: '#4f90ff', textColor: '#e0e6f1', borderColor: '#38415d', hoverBg: '#2a2f48', btnBg: '#3b466f', btnHoverBg: '#4f90ff' },
-  halloween: { bgColor: '#0a0a0a', navColor: '#1a0f0a', accentColor: '#ff6600', textColor: '#ffa500', borderColor: '#331a00', hoverBg: '#2a1a0f', btnBg: '#4a2a1a', btnHoverBg: '#ff6600' },
-  christmas: { bgColor: '#0a1a0a', navColor: '#1a2e1a', accentColor: '#c41e3a', textColor: '#f0f8ff', borderColor: '#2d5016', hoverBg: '#1f3d1f', btnBg: '#2d5016', btnHoverBg: '#c41e3a' },
-  dark: { bgColor: '#0a0a0a', navColor: '#1a1a1a', accentColor: '#00ff00', textColor: '#ffffff', borderColor: '#333333', hoverBg: '#2a2a2a', btnBg: '#262626', btnHoverBg: '#00ff00' },
-  light: { bgColor: '#f5f5f5', navColor: '#ffffff', accentColor: '#2563eb', textColor: '#1f2937', borderColor: '#e5e7eb', hoverBg: '#e5e7eb', btnBg: '#d1d5db', btnHoverBg: '#2563eb' },
-  midnight: { bgColor: '#0f0f23', navColor: '#1a1a2e', accentColor: '#9d4edd', textColor: '#e0e0e0', borderColor: '#3c3c5a', hoverBg: '#2a2a4e', btnBg: '#3c3c6f', btnHoverBg: '#9d4edd' },
-  ocean: { bgColor: '#001f3f', navColor: '#0a2f4f', accentColor: '#00d4ff', textColor: '#cfe2f3', borderColor: '#1a4f6f', hoverBg: '#1a3f5f', btnBg: '#2a5f7f', btnHoverBg: '#00d4ff' },
-  sunset: { bgColor: '#2d1b2e', navColor: '#3d2b3e', accentColor: '#ff6b9d', textColor: '#fce4ec', borderColor: '#5d4b5e', hoverBg: '#4d3b4e', btnBg: '#6d5b6e', btnHoverBg: '#ff6b9d' },
-  forest: { bgColor: '#1a2f1a', navColor: '#2a3f2a', accentColor: '#7cb342', textColor: '#e8f5e9', borderColor: '#3a5f3a', hoverBg: '#3a4f3a', btnBg: '#4a6f4a', btnHoverBg: '#7cb342' },
-  purple: { bgColor: '#1a0a2e', navColor: '#2a1a3e', accentColor: '#b744f7', textColor: '#f0e6ff', borderColor: '#4a3a5e', hoverBg: '#3a2a4e', btnBg: '#5a4a6e', btnHoverBg: '#b744f7' },
-  cyberpunk: { bgColor: '#0d0221', navColor: '#1a0b3a', accentColor: '#ff006e', textColor: '#00f5ff', borderColor: '#8338ec', hoverBg: '#2a1a4a', btnBg: '#3a2a5a', btnHoverBg: '#ff006e' },
-  matrix: { bgColor: '#000000', navColor: '#0a1a0a', accentColor: '#00ff41', textColor: '#00ff41', borderColor: '#003b00', hoverBg: '#0a2a0a', btnBg: '#1a3a1a', btnHoverBg: '#00ff41' },
-  neon: { bgColor: '#1a0033', navColor: '#2a0a4a', accentColor: '#ff00ff', textColor: '#00ffff', borderColor: '#4a1a6a', hoverBg: '#3a1a5a', btnBg: '#5a2a7a', btnHoverBg: '#ff00ff' },
-  fire: { bgColor: '#1a0a00', navColor: '#2a1a0a', accentColor: '#ff4500', textColor: '#ffe4b5', borderColor: '#4a2a1a', hoverBg: '#3a1a0a', btnBg: '#5a3a2a', btnHoverBg: '#ff4500' },
-  ice: { bgColor: '#0a1a2a', navColor: '#1a2a3a', accentColor: '#00bfff', textColor: '#e0f7ff', borderColor: '#2a3a4a', hoverBg: '#1a2a3a', btnBg: '#2a4a5a', btnHoverBg: '#00bfff' },
-  retro: { bgColor: '#2b1b17', navColor: '#3d2b27', accentColor: '#ff9966', textColor: '#ffeaa7', borderColor: '#5d4b47', hoverBg: '#4d3b37', btnBg: '#6d5b57', btnHoverBg: '#ff9966' }
-};
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
-// ===== SNOW EFFECT =====
-let snowEnabled = true;
-let snowInterval = null;
-
-function createSnowflake() {
-  if (!snowEnabled) return;
-  
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  const size = Math.random() * 4 + 2;
-  snowflake.style.width = `${size}px`;
-  snowflake.style.height = `${size}px`;
-  snowflake.style.left = `${Math.random() * window.innerWidth}px`;
-  const fallDuration = Math.random() * 10 + 5;
-  snowflake.style.animationDuration = `${fallDuration}s`;
-  snowflake.style.animationDelay = `${Math.random() * 15}s`;
-  snowflake.style.opacity = (Math.random() * 0.5 + 0.3).toFixed(2);
-  
-  const snowContainer = document.getElementById('snow-container');
-  if (snowContainer) {
-    snowContainer.appendChild(snowflake);
-    setTimeout(() => { 
-      if (snowflake.parentNode) {
-        snowflake.remove(); 
-      }
-    }, (fallDuration + 15) * 1000);
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
   }
 }
 
-function startSnow() {
-  if (snowInterval) return;
-  snowEnabled = true;
-  snowInterval = setInterval(createSnowflake, 200);
-  console.log('❄️ Snow effect started');
+/* Modern Navbar (Hidden but styled) */
+/* Enhanced Navbar */
+.navbar {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  gap: 24px;
+  transition: var(--transition-normal);
 }
 
-function stopSnow() {
-  snowEnabled = false;
-  if (snowInterval) {
-    clearInterval(snowInterval);
-    snowInterval = null;
-  }
-  const snowContainer = document.getElementById('snow-container');
-  if (snowContainer) snowContainer.innerHTML = '';
-  console.log('🛑 Snow effect stopped');
+.navbar.scrolled {
+  padding: 8px 5%;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: var(--shadow-lg);
 }
 
-// ===== TAB CLOAKING =====
-function applyTabCloaking(title, favicon) {
-  if (title) {
-    document.title = title;
-    localStorage.setItem('TabCloak_Title', title);
-    console.log('🔖 Tab title changed to:', title);
-  }
-  if (favicon) {
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.head.appendChild(link);
-    }
-    link.href = favicon;
-    localStorage.setItem('TabCloak_Favicon', favicon);
-    console.log('🖼️ Tab favicon changed to:', favicon);
-  }
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-// ===== THEME SYSTEM =====
-function applyTheme(themeName) {
-  const theme = themes[themeName];
-  if (!theme) {
-    console.warn('⚠️ Theme not found:', themeName);
-    return;
-  }
-  console.log('🎨 Applying theme:', themeName);
-  const root = document.documentElement;
-  root.style.setProperty('--bg-color', theme.bgColor);
-  root.style.setProperty('--nav-color', theme.navColor);
-  root.style.setProperty('--accent-color', theme.accentColor);
-  root.style.setProperty('--text-color', theme.textColor);
-  root.style.setProperty('--border-color', theme.borderColor);
-  root.style.setProperty('--hover-bg', theme.hoverBg);
-  root.style.setProperty('--btn-bg', theme.btnBg);
-  root.style.setProperty('--btn-hover-bg', theme.btnHoverBg);
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  user-select: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+  filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.4));
+  transition: var(--transition-normal);
+  position: relative;
+  padding: 8px 0;
 }
 
-// ===== LOAD SETTINGS =====
-function loadSettings() {
-  console.log('⚙️ Loading settings...');
-  
-  let themeToUse = 'original';
-  const savedTheme = localStorage.getItem('selectedTheme');
-  
-  if (!savedTheme && shouldAutoApplySeasonalTheme()) {
-    themeToUse = getSeasonalTheme();
-    console.log('🎨 Auto-applying seasonal theme:', themeToUse);
-  } else if (savedTheme) {
-    themeToUse = savedTheme;
-    console.log('🎨 Using saved theme:', themeToUse);
-  }
-
-  const savedTitle = localStorage.getItem('TabCloak_Title');
-  const savedFavicon = localStorage.getItem('TabCloak_Favicon');
-  const savedSnow = localStorage.getItem('snowEffect');
-  const savedHotkey = localStorage.getItem('hotkey') || '`';
-  const savedRedirect = localStorage.getItem('redirectURL') || 'https://google.com';
-  const savedAboutBlank = localStorage.getItem('aboutBlank');
-
-  if (savedTitle) {
-    document.title = savedTitle;
-    const titleInput = document.getElementById('customTitle');
-    if (titleInput) titleInput.value = savedTitle;
-  }
-
-  if (savedFavicon) {
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.head.appendChild(link);
-    }
-    link.href = savedFavicon;
-    const faviconInput = document.getElementById('customFavicon');
-    if (faviconInput) faviconInput.value = savedFavicon;
-  }
-
-  if (savedSnow === 'disabled') {
-    snowEnabled = false;
-    const snowToggle = document.getElementById('snowToggle');
-    if (snowToggle) snowToggle.checked = false;
-    stopSnow();
-  } else {
-    startSnow();
-  }
-
-  const hotkeyInput = document.getElementById('hotkey-input');
-  const redirectInput = document.getElementById('redirect-url-input');
-  if (hotkeyInput) hotkeyInput.value = savedHotkey;
-  if (redirectInput) redirectInput.value = savedRedirect;
-
-  const aboutBlankToggle = document.getElementById('aboutBlankToggle');
-  if (aboutBlankToggle) {
-    aboutBlankToggle.checked = savedAboutBlank === 'enabled';
-  }
-
-  applyTheme(themeToUse);
-  console.log('✅ Settings loaded successfully');
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
 }
 
-// ===== PANIC BUTTON =====
-function setupPanicButton() {
-  const savedHotkey = localStorage.getItem('hotkey') || '`';
-  const savedRedirect = localStorage.getItem('redirectURL') || 'https://google.com';
-  
-  console.log('🚨 Panic button setup - Hotkey:', savedHotkey);
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.key === savedHotkey) {
-      console.log('🚨 Panic button activated!');
-      window.location.href = savedRedirect;
-    }
-  });
-  
-  const changeHotkeyBtn = document.getElementById('change-hotkey-btn');
-  const hotkeyInput = document.getElementById('hotkey-input');
-  
-  if (changeHotkeyBtn && hotkeyInput) {
-    changeHotkeyBtn.addEventListener('click', () => {
-      hotkeyInput.focus();
-      hotkeyInput.placeholder = 'Press a key...';
-    });
+.logo:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-grow: 1;
+  max-width: 700px;
+}
+
+.navbar li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.navbar li a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  opacity: 0;
+  transition: var(--transition-normal);
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.navbar li a:hover,
+.navbar li a.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+}
+
+.navbar li a:hover::before,
+.navbar li a.active::before {
+  opacity: 1;
+}
+
+.navbar li a span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced Game Filters */
+.game-filters {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 32px auto;
+  flex-wrap: wrap;
+  padding: 0 5%;
+  max-width: 1400px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .game-filters {
+    padding: 0 16px;
+    gap: 8px;
   }
   
-  if (hotkeyInput) {
-    hotkeyInput.addEventListener('keydown', (e) => {
-      e.preventDefault();
-      if (e.key.length === 1 || e.key === 'Escape' || /^F\d{1,2}$/.test(e.key)) {
-        hotkeyInput.value = e.key;
-        localStorage.setItem('hotkey', e.key);
-        hotkeyInput.blur();
-        console.log('🔑 Hotkey changed to:', e.key);
-      }
-    });
+  .navbar {
+    padding: 12px 16px;
   }
   
-  const changeURLBtn = document.getElementById('change-URL-btn');
-  const redirectInput = document.getElementById('redirect-url-input');
+  .logo {
+    font-size: 24px;
+  }
   
-  if (changeURLBtn && redirectInput) {
-    changeURLBtn.addEventListener('click', () => {
-      const url = redirectInput.value.trim();
-      if (url) {
-        localStorage.setItem('redirectURL', url);
-        console.log('🔗 Redirect URL changed to:', url);
-        alert('Redirect URL updated!');
-      }
-    });
+  .navbar li a {
+    padding: 6px 12px;
+    font-size: 14px;
   }
 }
 
-// ===== UTILITY FUNCTIONS =====
-function debounce(func, delay = 300) {
-  let timeout;
-  return function (...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), delay);
-  };
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-function hideAll() {
-  document.querySelectorAll('.content').forEach(c => (c.style.display = 'none'));
-  document.querySelectorAll('.navbar li a').forEach(link => link.classList.remove('active'));
-  const infoButtons = document.querySelector('.homepage-info-buttons');
-  if (infoButtons) infoButtons.style.display = 'none';
+/* Focus states for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-// ===== GAME OF THE DAY =====
-function displayGameOfTheDay() {
-  console.log('🎮 Displaying Game of the Day');
-  const gotdContainer = document.getElementById('game-of-the-day-container');
-  if (!gotdContainer) return;
-  
-  if (typeof getGameOfTheDay !== 'function') {
-    console.error('❌ getGameOfTheDay not found');
-    return;
-  }
-  
-  try {
-    const game = getGameOfTheDay();
-    if (!game) return;
-    
-    gotdContainer.innerHTML = `
-      <div class="gotd-card">
-        <div class="gotd-badge">🌟 Game of the Day</div>
-        <img src="${game.image}" alt="${game.name}" loading="lazy" />
-        <h3>${game.name}</h3>
-        <button class="gotd-play-btn" onclick="loadGame('${game.url}')">Play Now</button>
-      </div>
-    `;
-  } catch (error) {
-    console.error('❌ Error displaying Game of the Day:', error);
-  }
+/* Selection styling */
+::selection {
+  background: var(--accent-color);
+  color: white;
 }
 
-// ===== NAVIGATION FUNCTIONS =====
-function showHome() {
-  hideAll();
-  const homeContent = document.getElementById('content-home');
-  if (homeContent) homeContent.style.display = 'block';
-  const homeLink = document.getElementById('homeLink');
-  if (homeLink) homeLink.classList.add('active');
-  const infoButtons = document.querySelector('.homepage-info-buttons');
-  if (infoButtons) infoButtons.style.display = 'flex';
-  displayGameOfTheDay();
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-function showGames() {
-  hideAll();
-  const gamesContent = document.getElementById('content-gms');
-  if (gamesContent) gamesContent.style.display = 'block';
-  const gameLink = document.getElementById('gameLink');
-  if (gameLink) gameLink.classList.add('active');
-  
-  if (!document.querySelector('.game-filters') && window.GameStats) {
-    const searchContainer = document.querySelector('.search-container');
-    if (searchContainer) {
-      const filtersHTML = window.GameStats.createFilterButtons();
-      searchContainer.insertAdjacentHTML('afterend', filtersHTML);
-    }
-  }
-  
-  if (typeof games !== 'undefined' && Array.isArray(games)) {
-    const activeFilter = document.querySelector('.filter-btn.active');
-    if (activeFilter) {
-      const filter = activeFilter.dataset.filter;
-      window.filterGames(filter);
-    } else {
-      renderGames(games);
-    }
-  }
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
 }
 
-function showApps() {
-  hideAll();
-  const appsContent = document.getElementById('content-aps');
-  if (appsContent) appsContent.style.display = 'block';
-  const appsLink = document.getElementById('appsLink');
-  if (appsLink) appsLink.classList.add('active');
-  
-  if (typeof apps !== 'undefined' && Array.isArray(apps)) {
-    renderApps(apps);
-  }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
 }
 
-function showWebsites() {
-  hideAll();
-  const websitesContent = document.getElementById('content-websites');
-  if (websitesContent) websitesContent.style.display = 'block';
-  const websitesLink = document.getElementById('websitesLink');
-  if (websitesLink) websitesLink.classList.add('active');
-  
-  if (typeof websites !== 'undefined' && Array.isArray(websites)) {
-    renderWebsites(websites);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
 }
 
-function showAbout() {
-  hideAll();
-  const aboutContent = document.getElementById('content-about');
-  if (aboutContent) aboutContent.style.display = 'block';
-  const aboutLink = document.getElementById('aboutLink');
-  if (aboutLink) aboutLink.classList.add('active');
+.filter-btn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--text-muted);
+  border: 1.5px solid var(--border-color);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
-function showSettings() {
-  hideAll();
-  const settingsContent = document.getElementById('content-settings');
-  if (settingsContent) settingsContent.style.display = 'block';
-  const settingsLink = document.getElementById('settingsLink');
-  if (settingsLink) settingsLink.classList.add('active');
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-// ===== RENDER FUNCTIONS =====
-function renderGames(gamesToRender) {
-  const gameList = document.getElementById('game-list');
-  if (!gameList) return;
-  
-  gameList.innerHTML = '';
-  
-  if (!gamesToRender || gamesToRender.length === 0) {
-    gameList.innerHTML = '<p style="padding: 20px; text-align: center;">No games found.</p>';
-    return;
-  }
-  
-  gamesToRender.forEach(game => {
-    if (!game || !game.name || !game.url) return;
-    
-    const isFavorited = window.GameStats ? window.GameStats.isFavorite(game.url) : false;
-    
-    const card = document.createElement('div');
-    card.className = 'game-card';
-    card.tabIndex = 0;
-    card.innerHTML = `
-      ${window.GameStats ? window.GameStats.createFavoriteButton(game.url, isFavorited) : ''}
-      <img src="${game.image || 'https://via.placeholder.com/250x250?text=Game'}" alt="${game.name}" loading="lazy" />
-      <h3>${game.name}</h3>
-    `;
-    card.onclick = () => loadGame(game.url);
-    card.onkeypress = (e) => { if (e.key === 'Enter') loadGame(game.url); };
-    gameList.appendChild(card);
-  });
+.filter-btn:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+  color: var(--text-color);
 }
 
-function renderApps(appsToRender) {
-  const appList = document.getElementById('app-list');
-  if (!appList) return;
-  
-  appList.innerHTML = '';
-  
-  if (!appsToRender || appsToRender.length === 0) {
-    appList.innerHTML = '<p>No apps found.</p>';
-    return;
-  }
-  
-  appsToRender.forEach(app => {
-    if (!app || !app.name || !app.url) return;
-    
-    const card = document.createElement('div');
-    card.className = 'app-card';
-    card.innerHTML = `
-      <img src="${app.image || 'https://via.placeholder.com/250x250?text=App'}" alt="${app.name}" loading="lazy" />
-      <h3>${app.name}</h3>
-    `;
-    card.onclick = () => loadGame(app.url);
-    appList.appendChild(card);
-  });
+.filter-btn.active {
+  border-color: transparent;
+  color: white;
+  box-shadow: var(--shadow-glow);
 }
 
-function renderWebsites(websitesToRender) {
-  const websitesList = document.getElementById('websites-list');
-  if (!websitesList) return;
-  
-  websitesList.innerHTML = '';
-  
-  if (!websitesToRender || websitesToRender.length === 0) {
-    websitesList.innerHTML = '<p>No websites found.</p>';
-    return;
-  }
-  
-  const list = document.createElement('ul');
-  list.style.cssText = 'list-style: none; padding: 20px; max-width: 800px; margin: 0 auto;';
-  
-  websitesToRender.forEach(website => {
-    if (!website || !website.name || !website.url) return;
-    
-    const listItem = document.createElement('li');
-    listItem.style.cssText = 'padding: 15px; margin-bottom: 10px; background: var(--nav-color); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.3s ease;';
-    
-    listItem.innerHTML = `
-      <a href="${website.url}" target="_blank" style="color: var(--accent-color); text-decoration: none; font-size: 18px; display: flex; align-items: center; gap: 10px;">
-        <span>🔗</span>
-        <div>
-          <div style="font-weight: 600;">${website.name}</div>
-          <div style="font-size: 14px; color: var(--text-color); opacity: 0.7; margin-top: 4px;">${website.url}</div>
-        </div>
-      </a>
-    `;
-    
-    listItem.addEventListener('mouseenter', function() {
-      this.style.background = 'var(--hover-bg)';
-      this.style.borderColor = 'var(--accent-color)';
-      this.style.transform = 'translateX(5px)';
-    });
-    
-    listItem.addEventListener('mouseleave', function() {
-      this.style.background = 'var(--nav-color)';
-      this.style.borderColor = 'var(--border-color)';
-      this.style.transform = 'translateX(0)';
-    });
-    
-    list.appendChild(listItem);
-  });
-  
-  websitesList.appendChild(list);
+.filter-btn.active::before {
+  opacity: 1;
 }
 
-function loadGame(url) {
-  if (!url) {
-    console.error('❌ No URL provided');
-    alert('Error: Game URL is missing.');
-    return;
-  }
-  
-  console.log('🎮 Loading game:', url);
-  
-  try {
-    const isYouTube = url.includes('/others/assets/apps/YouTube.html') || url.includes('youtu.be');
-    
-    if (isYouTube) {
-      window.open(url, '_blank');
-      console.log('▶️ Opening YouTube in new tab');
-      return;
-    }
-    
-    hideAll();
-    const gameDisplay = document.getElementById('game-display');
-    const gameIframe = document.getElementById('game-iframe');
-    
-    if (!gameDisplay || !gameIframe) {
-      console.error('❌ Game display elements not found');
-      alert('Error: Unable to load game.');
-      return;
-    }
-    
-    if (window.GameStats) {
-      window.GameStats.stopTracking();
-    }
-    
-    gameIframe.src = '';
-    gameIframe.src = url;
-    gameDisplay.style.display = 'block';
-    
-    gameIframe.onload = function() {
-      console.log('✅ Game loaded successfully');
-      if (window.GameStats) {
-        window.GameStats.startTracking(url);
-      }
-    };
-    
-    gameIframe.onerror = function() {
-      console.error('❌ Failed to load game:', url);
-      alert('Error loading game.');
-    };
-  } catch (error) {
-    console.error('❌ Error in loadGame:', error);
-    alert('An error occurred while loading the game.');
-  }
+.filter-btn span {
+  position: relative;
+  z-index: 1;
 }
 
-function searchGames() {
-  const searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
-  
-  const query = searchInput.value.toLowerCase().trim();
-  console.log('🔍 Searching games for:', query);
-  
-  if (typeof games === 'undefined' || !Array.isArray(games)) {
-    console.error('❌ games array not found');
-    return;
-  }
-  
-  if (!query) {
-    renderGames(games);
-    return;
-  }
-  
-  const filtered = games.filter(game => game && game.name && game.name.toLowerCase().includes(query));
-  console.log('✅ Found', filtered.length, 'matching games');
-  renderGames(filtered);
+/* Favorite Button */
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(10, 14, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--border-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
 }
 
-function searchWebsites() {
-  const searchInput = document.getElementById('websitesSearchInput');
-  if (!searchInput) return;
-  
-  const query = searchInput.value.toLowerCase().trim();
-  
-  if (typeof websites === 'undefined' || !Array.isArray(websites)) {
-    console.error('❌ websites array not found');
-    return;
-  }
-  
-  if (!query) {
-    renderWebsites(websites);
-    return;
-  }
-  
-  const filtered = websites.filter(site => site && site.name && site.name.toLowerCase().includes(query));
-  renderWebsites(filtered);
+.favorite-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
-function toggleFullscreen() {
-  const gameIframe = document.getElementById('game-iframe');
-  if (!gameIframe) return;
-  
-  try {
-    if (!document.fullscreenElement) {
-      gameIframe.requestFullscreen().catch(err => {
-        console.error('❌ Fullscreen error:', err);
-        alert('Fullscreen not available. Click on the game first.');
-      });
-    } else {
-      document.exitFullscreen();
-    }
-  } catch (error) {
-    console.error('❌ Fullscreen error:', error);
+.favorite-btn svg {
+  color: #ffd700;
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+.favorite-btn.favorited {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.favorite-btn.favorited svg {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes favoritePopup {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.favorite-btn.favorited {
+  animation: favoritePopup 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Settings Page */
+.settings-page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.settings-page-container .settings-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.settings-page-container .settings-section:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.settings-page-container .settings-section h3 {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.setting-item {
+  margin-bottom: 20px;
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.setting-item input[type="text"],
+.setting-item input[type="password"],
+.setting-item select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.setting-item input[type="text"]:focus,
+.setting-item input[type="password"]:focus,
+.setting-item select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.setting-item input[type="checkbox"] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.setting-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-small {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before,
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  color: #fff;
+  flex: 1;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.btn-secondary {
+  background: var(--btn-bg);
+  color: var(--text-color);
+  flex: 1;
+  border: 1.5px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:hover::before {
+  opacity: 0.1;
+}
+
+.btn-small {
+  background: var(--btn-bg);
+  color: var(--text-color);
+  padding: 10px 20px;
+  margin-left: 12px;
+  border: 1.5px solid var(--border-color);
+}
+
+.btn-small:hover {
+  background: var(--accent-color);
+  color: #fff;
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.btn-primary span,
+.btn-secondary span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Info Modals */
+.info-modal {
+  display: none;
+  position: fixed;
+  z-index: 10001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+}
+
+.info-modal-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  margin: 5% auto;
+  padding: 0;
+  border: 2px solid var(--glass-border);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 750px;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(99, 102, 241, 0.2);
+  animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
 }
 
-// ===== INITIALIZATION =====
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-  initializeApp();
+.info-modal-content h2 {
+  margin: 0;
+  padding: 32px 40px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
+  font-size: 36px;
+  font-weight: 800;
+  text-align: center;
+  border-bottom: 2px solid var(--glass-border);
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-function initializeApp() {
-  try {
-    console.log('🚀 Initializing GalaxyVerse...');
-    console.log('✅ Free access enabled - No authentication required');
-    console.log('📊 Console Status:', {
-      available: !!window.GVerseConsole,
-      initialized: window.GVerseConsole?.initialized || false,
-      isOpen: window.GVerseConsole?.isOpen || false,
-      logCount: window.GVerseConsole?.logs?.length || 0
-    });
-  
-  loadSettings();
-  showHome();
-  setupPanicButton();
+.info-modal-content h3 {
+  color: var(--accent-color);
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
 
-  const themeSelect = document.getElementById('themeSelect');
-  if (themeSelect) {
-    const savedTheme = localStorage.getItem('selectedTheme');
-    if (savedTheme) {
-      themeSelect.value = savedTheme;
-    } else if (shouldAutoApplySeasonalTheme()) {
-      themeSelect.value = getSeasonalTheme();
-    } else {
-      themeSelect.value = 'original';
-    }
-    
-    themeSelect.addEventListener('change', (e) => {
-      const theme = e.target.value;
-      applyTheme(theme);
-      localStorage.setItem('selectedTheme', theme);
-      console.log('🎨 Theme manually selected:', theme);
-    });
+.info-modal-content h4 {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.info-modal-body {
+  padding: 32px 40px;
+  overflow-y: auto;
+  max-height: calc(85vh - 120px);
+}
+
+.info-modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.info-modal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.info-modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
+  border-radius: 10px;
+}
+
+.info-modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-secondary), var(--accent-color));
+}
+
+.info-modal-body p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.info-modal-body ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 16px 0;
+}
+
+.info-modal-body ul li {
+  color: var(--text-color);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  background: rgba(99, 102, 241, 0.05);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 10px;
+  line-height: 1.6;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-modal-body ul li:hover {
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateX(6px);
+  border-left-width: 4px;
+}
+
+.info-modal-body a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.info-modal-body a:hover {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+.info-close {
+  color: var(--text-muted);
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.info-close:hover {
+  color: var(--accent-color);
+  transform: rotate(90deg);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+/* Homepage Info Buttons */
+.homepage-info-buttons {
+  position: fixed;
+  bottom: 40px;
+  left: 100px;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.info-btn {
+  pointer-events: all;
+  padding: 16px 32px;
+  border: 2px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.info-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  border-color: var(--accent-color);
+}
+
+.info-btn:hover::before {
+  opacity: 1;
+}
+
+.info-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.info-btn:active {
+  transform: translateY(-2px);
+}
+
+/* Container and Content */
+.container {
+  max-width: 1400px;
+  margin: 24px auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.content {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  const creditsBtn = document.getElementById('creditsBtn');
-  const updateLogBtn = document.getElementById('updateLogBtn');
-  const creditsModal = document.getElementById('creditsModal');
-  const updateLogModal = document.getElementById('updateLogModal');
-
-  if (creditsBtn && creditsModal) {
-    creditsBtn.addEventListener('click', () => {
-      creditsModal.style.display = 'block';
-    });
+  to { 
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  if (updateLogBtn && updateLogModal) {
-    updateLogBtn.addEventListener('click', () => {
-      updateLogModal.style.display = 'block';
-    });
-  }
+/* Game and App Grids */
+.game-grid, .app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  justify-items: center;
+  padding: 0 20px;
+}
 
-  document.querySelectorAll('.info-close').forEach(closeBtn => {
-    closeBtn.addEventListener('click', function() {
-      const modalId = this.getAttribute('data-modal');
-      const modalElement = document.getElementById(modalId);
-      if (modalElement) {
-        modalElement.style.display = 'none';
-      }
-    });
-  });
+.game-card, .app-card {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  background: linear-gradient(135deg, #1a1f2e, #12171f);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid var(--border-color);
+}
 
-  window.onclick = (e) => {
-    if (e.target.classList.contains('info-modal')) {
-      e.target.style.display = 'none';
-    }
-  };
+.game-card::before, .app-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
 
-  const applyBtn = document.getElementById('applyBtn');
-  if (applyBtn) {
-    applyBtn.addEventListener('click', () => {
-      const titleInput = document.getElementById('customTitle');
-      const faviconInput = document.getElementById('customFavicon');
-      const title = titleInput ? titleInput.value.trim() : '';
-      const favicon = faviconInput ? faviconInput.value.trim() : '';
-      applyTabCloaking(title, favicon);
-      alert('Tab cloaking applied!');
-    });
-  }
+.game-card:hover, .app-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-lg), 0 16px 48px rgba(99, 102, 241, 0.3);
+  border-color: var(--accent-color);
+}
 
-  const resetBtn = document.getElementById('resetBtn');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      localStorage.removeItem('TabCloak_Title');
-      localStorage.removeItem('TabCloak_Favicon');
-      document.title = 'GalaxyVerse';
-      const link = document.querySelector("link[rel~='icon']");
-      if (link) link.href = '';
-      const titleInput = document.getElementById('customTitle');
-      const faviconInput = document.getElementById('customFavicon');
-      if (titleInput) titleInput.value = '';
-      if (faviconInput) faviconInput.value = '';
-      const presetSelect = document.getElementById('presetSelect');
-      if (presetSelect) presetSelect.value = '';
-      alert('Tab cloaking reset!');
-    });
-  }
+.game-card:hover::before, .app-card:hover::before {
+  opacity: 1;
+}
 
-  const presetSelect = document.getElementById('presetSelect');
-  if (presetSelect) {
-    presetSelect.addEventListener('change', (e) => {
-      const selected = presets[e.target.value];
-      if (selected) {
-        const titleInput = document.getElementById('customTitle');
-        const faviconInput = document.getElementById('customFavicon');
-        if (titleInput) titleInput.value = selected.title;
-        if (faviconInput) faviconInput.value = selected.favicon;
-        applyTabCloaking(selected.title, selected.favicon);
-      }
-    });
-  }
+.game-card img, .app-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  const snowToggle = document.getElementById('snowToggle');
-  if (snowToggle) {
-    snowToggle.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        localStorage.setItem('snowEffect', 'enabled');
-        startSnow();
-      } else {
-        localStorage.setItem('snowEffect', 'disabled');
-        stopSnow();
-      }
-    });
-  }
+.game-card:hover img, .app-card:hover img {
+  transform: scale(1.05);
+}
 
-  const aboutBlankToggle = document.getElementById('aboutBlankToggle');
-  if (aboutBlankToggle) {
-    aboutBlankToggle.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        localStorage.setItem('aboutBlank', 'enabled');
-      } else {
-        localStorage.removeItem('aboutBlank');
-      }
-    });
-  }
+.game-card h3, .app-card h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(to top, 
+    rgba(10, 14, 26, 0.98), 
+    rgba(10, 14, 26, 0.9), 
+    transparent);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  user-select: none;
+  letter-spacing: 0.3px;
+}
 
-  // Navigation
-  const homeLink = document.getElementById('homeLink');
-  const gameLink = document.getElementById('gameLink');
-  const appsLink = document.getElementById('appsLink');
-  const websitesLink = document.getElementById('websitesLink');
-  const settingsLink = document.getElementById('settingsLink');
-  const aboutLink = document.getElementById('aboutLink');
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px auto;
+  gap: 12px;
+  max-width: 600px;
+  padding: 0 20px;
+}
 
-  if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
-  if (gameLink) gameLink.addEventListener('click', (e) => { e.preventDefault(); showGames(); });
-  if (appsLink) appsLink.addEventListener('click', (e) => { e.preventDefault(); showApps(); });
-  if (websitesLink) websitesLink.addEventListener('click', (e) => { e.preventDefault(); showWebsites(); });
-  if (settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSettings(); });
-  if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAbout(); });
+.search-container input[type="text"] {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 1.5px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--text-color);
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
 
-  // Back buttons
-  const backToHomeGame = document.getElementById('backToHomeGame');
-  const backToHomeApps = document.getElementById('backToHomeApps');
-  const backToHomeWebsites = document.getElementById('backToHomeWebsites');
-  
-  if (backToHomeGame) {
-    backToHomeGame.addEventListener('click', () => {
-      if (window.GameStats) {
-        window.GameStats.stopTracking();
-      }
-      showHome();
-    });
-  }
-  
-  if (backToHomeApps) {
-    backToHomeApps.addEventListener('click', () => showHome());
-  }
-  
-  if (backToHomeWebsites) {
-    backToHomeWebsites.addEventListener('click', () => showHome());
-  }
+.search-container input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
 
-  // Search
-  const searchBtn = document.getElementById('searchBtn');
-  const searchInput = document.getElementById('searchInput');
-  
-  if (searchBtn) {
-    searchBtn.addEventListener('click', searchGames);
-  }
-  
-  if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') searchGames();
-    });
-    searchInput.addEventListener('input', debounce(searchGames, 300));
-  }
+.search-container button {
+  padding: 14px 28px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
 
-  // Websites search
-  const websitesSearchBtn = document.getElementById('websitesSearchBtn');
-  const websitesSearchInput = document.getElementById('websitesSearchInput');
-  
-  if (websitesSearchBtn) {
-    websitesSearchBtn.addEventListener('click', searchWebsites);
-  }
-  
-  if (websitesSearchInput) {
-    websitesSearchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') searchWebsites();
-    });
-    websitesSearchInput.addEventListener('input', debounce(searchWebsites, 300));
-  }
+.search-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
 
-  // Fullscreen
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
-  if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
-  }
+/* Back Buttons */
+#backToHomeApps,
+#backToHomeGame,
+#backToHomeWebsites {
+  padding: 14px 32px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 32px;
+  box-shadow: var(--shadow-md);
+}
 
-  console.log('✅ GalaxyVerse initialized successfully');
-  console.log('📊 Console active - Press Ctrl+Shift+K to toggle');
-  console.log('🎮 All features unlocked - No authentication required');
-  console.log('✨ Enjoy free access to all games, apps, and websites!');
-  
-  } catch (error) {
-    console.error('❌ Critical error during initialization:', error);
-    alert('An error occurred during initialization. Check console.');
-  }
+#backToHomeApps:hover,
+#backToHomeGame:hover,
+#backToHomeWebsites:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+/* Game Play Area */
+.game-play-area {
+  background: #000;
+  border: 2px solid var(--accent-color);
+  border-radius: 20px;
+  padding: 12px;
+  position: relative;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.game-iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  border-radius: 12px;
+}
+
+.fullscreen-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 10000;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+
+.fullscreen-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Admin Panel Styles */
+.admin-subsection {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.admin-subsection h4 {
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 20px;
+  font-weight: 700;
 }
