@@ -62,7 +62,7 @@ const games = [
   { name: "Granny", image: "others/assets/games/images/granny.png", url: "others/assets/games/Granny.html" },
   // H
   { name: "Highway Racer 2", image: "others/assets/games/images/highwayracer.jpg", url: "others/assets/games/Highway Racer 2.html" },
-  { name: "Hotline Miami", image: "others/assets/games/images/highwayracer.jpg", url: "others/assets/games/Hotline Miami.html" },
+  { name: "Hotline Miami", image: "others/assets/games/images/hotline Miami.png", url: "others/assets/games/Hotline Miami.html" },
   
   { name: "Infinite Craft", image: "others/assets/games/images/infcraft.jpg", url: "others/assets/games/Infinite Craft" },
   // J
