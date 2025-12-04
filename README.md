@@ -5,19 +5,26 @@
 
 ### Contributors:
 - <a href="https://dsc.gg/galaxyproxi">GalaxyVerse</a> (Archived)
-- Anzo
-- <a href="https://github.com/JustJxrdanWasDefinetlyTaken">Jordan</a>
-- <a href="https://github.com/Coding4Hours">Coding4Hours</a>
+- Anzo (Developer)
+- <a href="https://github.com/JustJxrdanWasDefinetlyTaken">Jordan</a> (Developer)
+- <a href="https://github.com/Coding4Hours">Coding4Hours</a> (Developer)
 
 ### Features
 - 100+ Games
 - Themes
+- Scramjet and Ultraviolet
 
 ### Coming Soon
 - Import / Export Data
-- Scramjet / Something
+- Fixing some games
+- more games
+- More apps
+- Movies
+- Spotify
+- Netflix
 
 ### Credits
 - <a href="//github.com/3kh0">3kh0 - CDN</a>
 - <a href="//github.com/mercuryworkshop">MercuryWorkshop - Scramjet</a>
 - UGS Assets, Ultimate Game Stash, gn-math, - Ports
+- Coding4Hours - lithium / Bromine
