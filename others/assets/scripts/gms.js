@@ -18,6 +18,7 @@ const games = [
   { name: "Among Us", image: "others/assets/games/images/amongus.jpg", url: "others/assets/games/Among Us.html" },
   { name: "Angry Birds", image: "others/assets/games/images/angrybirds.jpeg", url: "others/assets/games/Angry Birds.html" },
   // B
+  { name: "Backrooms", image: "others/assets/games/images/backrooms.png", url: "others/assets/games/backrooms.html" },
   { name: "Bacon May Die", image: "others/assets/games/images/bacon-may-die.png", url: "others/assets/games/Bacon May Die.html" },
   { name: "Bad Ice Cream", image: "others/assets/games/images/badicecream.png", url: "others/assets/games/clbadicecream.html" },
   { name: "Bad Parenting 1", image: "others/assets/games/images/badparent.jpeg", url: "others/assets/games/Bad Parenting 1.html" },
@@ -30,13 +31,18 @@ const games = [
   { name: "Blackjack", image: "others/assets/games/images/blackjack.png", url: "others/assets/games/BlackJack.html" },
   { name: "Blade Ball", image: "others/assets/games/images/bladeball.png", url: "others/assets/games/Blade Ball.html" },
   { name: "Block Blast", image: "others/assets/games/images/blockblast.jpeg", url: "others/assets/games/Block Blast.html" },
+  { name: "Blockpost", image: "others/assets/games/images/blockpost.jpeg", url: "others/assets/games/block post.html" },
+  { name: "Blocky Snakes", image: "others/assets/games/images/Blocky Snakes.jpg", url: "others/assets/games/blocky snakes.html" },
   { name: "Bloxorz", image: "others/assets/games/images/blockorz.jpeg", url: "others/assets/games/Bloxorz.html" },
+  { name: "Boxing Random", image: "others/assets/games/images/boxing random.png", url: "others/assets/games/boxing random.html" },
   { name: "Buildnow.gg", image: "others/assets/games/images/buildnowgg.png", url: "others/assets/games/buildnowgg.html" },
   { name: "Bulletforce", image: "others/assets/games/images/bulletforce.png", url: "others/assets/games/bulletforce.html" },
   // D
   { name: "Drive Mad", image: "others/assets/games/images/drivemad.png", url: "others/assets/games/drive mady.html" },
   // C
   { name: "Candy Crush", image: "others/assets/games/images/candycrush.png", url: "others/assets/games/Candy Crush.html" },
+  { name: "Car Crash 3", image: "others/assets/games/images/car crash 3.png", url: "others/assets/games/car crash 3.html" },
+  { name: "Cat Mario", image: "others/assets/games/images/cat mario.jpeg", url: "others/assets/games/cat mario.html" },
   { name: "Cluster Rush", image: "others/assets/games/images/clusterrush.jpeg", url: "others/assets/games/Cluster Rush.html" },
   { name: "Cookie Clicker", image: "others/assets/games/images/cookie-clicker.png", url: "others/assets/games/Cookie Clicker.html" },
   { name: "Crazy Cars", image: "others/assets/games/images/crazycars.jpg", url: "others/assets/games/Crazy Cars.html" },
@@ -58,10 +64,13 @@ const games = [
   // G
   { name: "Geometry Dash Lite", image: "others/assets/games/images/dashlite.png", url: "others/assets/games/geometrydash.html" },
   { name: "Google Baseball", image: "others/assets/games/images/baseball.png", url: "others/assets/games/Google Baseball.html" },
+  { name: "Google Dino", image: "others/assets/games/images/Google dino.jpeg", url: "others/assets/games/Google Baseball.html" },
   { name: "Google Feud", image: "others/assets/games/images/googlefeud.jpg", url: "others/assets/games/Google Feud.html" },
   { name: "Granny", image: "others/assets/games/images/granny.png", url: "others/assets/games/Granny.html" },
+  { name: "Grow a Garden", image: "others/assets/games/images/grow a garden.png", url: "others/assets/games/growagarden.html" },
   // H
   { name: "Highway Racer 2", image: "others/assets/games/images/highwayracer.jpg", url: "others/assets/games/Highway Racer 2.html" },
+  { name: "Hole.io", image: "others/assets/games/images/hole-io.png", url: "others/assets/games/hole.io.html" },
   { name: "Hotline Miami", image: "others/assets/games/images/hotline Miami.png", url: "others/assets/games/Hotline Miami.html" },
   
   { name: "Infinite Craft", image: "others/assets/games/images/infcraft.jpg", url: "others/assets/games/Infinite Craft" },
@@ -81,15 +90,19 @@ const games = [
   // N
   { name: "n-gon", image: "others/assets/games/images/ngone.png", url: "others/assets/games/n-gon.html" },
   // P
-  { name: "Paper.IO", image: "others/assets/games/images/paperio2.png", url: "others/assets/games/Paper.io 2.html" },
+  { name: "Paper.io", image: "others/assets/games/images/paperio2.png", url: "others/assets/games/Paper.io 2.html" },
+  { name: "Paper.io 3D", image: "others/assets/games/images/paper.io3d.png", url: "others/assets/games/paperio 3d.html" },
   { name: "Pixel Gun Survival", image: "others/assets/games/images/pixelgunshoot.jpg", url: "others/assets/games/Pixel Gun Survival.html" },
   { name: "Polytrack", image: "others/assets/games/images/polytrack.jpg", url: "others/assets/games/polytrack.html" },
   { name: "Pokemon Emerald", image: "others/assets/games/images/pokemon emerald.jpg", url: "others/assets/games/Pokemon Emerald.html" },
   { name: "Pokemon Red", image: "others/assets/games/images/pokemonred.jpeg", url: "others/assets/games/Pokemon Red.html" },
   { name: "Pou", image: "others/assets/games/images/pou.png", url: "others/assets/games/pou.html" },
+  // Q
+  { name: "Quake III", image: "others/assets/games/images/quake III arena.png", url: "others/assets/games/quake 3.html" },
   // R
   { name: "Ragdoll Archers", image: "others/assets/games/images/RagdollArchers.jpg", url: "others/assets/games/ragdollarchers.html" },
   { name: "Rainbow Obby", image: "others/assets/games/images/rainbowobby.png", url: "others/assets/games/Rainbow Obby.html" },
+  { name: "Red Vs Blue", image: "others/assets/games/images/red vs blue.jpg", url: "others/assets/games/red vs blue.html" },
   { name: "Retro Highway", image: "others/assets/games/images/retrohighway.jpg", url: "others/assets/games/retrohighway.html" },
   { name: "Retro Bowl", image: "others/assets/games/images/retro-bowl.jpeg", url: "others/assets/games/Retro Bowl.html" },
   { name: "Retro Bowl College", image: "others/assets/games/images/retrobrowlcollege.jpg", url: "others/assets/games/Retro Bowl College.html" },
