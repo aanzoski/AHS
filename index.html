@@ -161,6 +161,109 @@
       opacity: 0.7;
       font-size: 16px;
     }
+
+    /* Data Management Styles */
+    .data-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .data-section {
+      background: var(--nav-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .data-section h3 {
+      color: var(--accent-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .data-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .data-btn {
+      padding: 12px 24px;
+      background: var(--btn-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .data-btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .data-btn.primary {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+      border-color: transparent;
+    }
+
+    .data-btn.danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      border-color: transparent;
+    }
+
+    .data-info {
+      background: rgba(124, 58, 237, 0.1);
+      border-left: 3px solid var(--accent-color);
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .data-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .data-stat {
+      background: rgba(124, 58, 237, 0.05);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+
+    .data-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-top: 5px;
+    }
+
+    #import-file {
+      display: none;
+    }
   </style>
 </head>
 
@@ -213,6 +316,13 @@
         </svg>
         <span>Settings</span>
       </a>
+      <a href="#" class="sidebar-link" id="dataLink" data-page="data" title="Data">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="5"></circle>
+          <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"></path>
+        </svg>
+        <span>Data</span>
+      </a>
     </nav>
   </div>
 
@@ -236,7 +346,7 @@
             <li><a href="https://www.galaxyverse.org/" target="_blank" rel="noopener noreferrer">GalaxyVerse</a></li>
             <li><a href="https://github.com/JustJxrdanWasDefinetlyTaken" target="_blank"
                 rel="noopener noreferrer">Jordan's Projects</a></li>
-            <li><a href="https://gn-math.dev/" target="_blank" rel="noopener noreferrer">gn-math for some games</a></li>
+            <li><a href="https://gn-math.dev/" target="_blank" rel="noopener noreferrer">gn-math for some Gᾰmes</a></li>
           </ul>
 
           <p><strong>Contributors:</strong></p>
@@ -260,17 +370,17 @@
     <div id="updateLogModal" class="info-modal">
       <div class="info-modal-content">
         <span class="info-close" data-modal="updateLogModal">&times;</span>
-        <h2>Update Log V1.2.3</h2>
+        <h2>Update Log V1.2.4</h2>
         <div class="info-modal-body">
           <ul>
-            <li>More and More games</li>
+            <li>More and More Gᾰmes</li>
             <li>Revamped Search</li>
             <li>More apps</li>
           </ul>
 
           <h4>Coming Soon</h4>
           <ul>
-            <li>More games</li>
+            <li>More Gᾰmes</li>
           </ul>
         </div>
       </div>
@@ -281,7 +391,7 @@
         <!-- Featured Section -->
         <div class="featured-section">
           <h2>🎮 Welcome to Relic</h2>
-          <p>Discover the best unblocked games here that you can find</p>
+          <p>Discover the best Gᾰmes here that you can find</p>
           <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
             <b>No key system required.</b>
           </p>
@@ -312,7 +422,7 @@
         </div>
       </div>
 
-      <!-- PROXY SEARCH SECTION - COMPLETELY REPLACED -->
+      <!-- PROXY SEARCH SECTION -->
       <div id="content-search" class="content" style="display:none;">
         <div class="proxy-browser-container">
           <div class="proxy-header">
@@ -335,8 +445,8 @@
 
           <div class="proxy-iframe-container">
             <div class="proxy-welcome" id="proxyWelcome">
-              <h2>🔍 Proxy Browser</h2>
-              <p>Enter a URL or search query to browse anonymously</p>
+              <h2>🔍 Search</h2>
+              <p>Enter a URL or search query to browse</p>
             </div>
             <div class="loading-indicator" id="loadingIndicator">Loading...</div>
             <iframe 
@@ -352,7 +462,7 @@
       <div id="content-gms" class="content" style="display:none;">
         <h1>Gᾰmes</h1>
         <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Search for games..." />
+          <input type="text" id="searchInput" placeholder="Search 100+ Gᾰmes" />
           <button id="searchBtn">Search</button>
         </div>
         <div id="game-list" class="game-grid">
@@ -469,6 +579,56 @@
         </div>
       </div>
 
+      <!-- DATA MANAGEMENT SECTION -->
+      <div id="content-data" class="content" style="display:none;">
+        <div class="data-container">
+          <h1 style="color: var(--accent-color); margin-bottom: 30px;">📊 Data Management</h1>
+          
+          <!-- Statistics Section -->
+          <div class="data-section">
+            <h3>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18"></path>
+                <path d="M18 17V9"></path>
+                <path d="M13 17V5"></path>
+                <path d="M8 17v-3"></path>
+              </svg>
+              Your Statistics
+            </h3>
+            <div class="data-stats" id="data-stats">
+              <!-- Stats will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Export Section -->
+          <div class="data-section">
+            <h3>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export Your Data
+            </h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
+              Permanently delete all your saved data, settings, and preferences. This action cannot be undone.
+            </p>
+            <div class="data-actions">
+              <button class="data-btn danger" id="clear-data-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Clear All Data
+              </button>
+            </div>
+            <div class="data-info" style="border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+              <strong>⚠️ Warning:</strong> This will reset everything to default. Export your data first if you want to keep a backup!
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="game-display" class="content" style="display:none;">
         <div class="game-play-area" id="game-play-area">
           <button class="fullscreen-btn" id="fullscreenBtn">Fullscreen</button>
@@ -524,11 +684,7 @@
   <!-- PROXY BROWSER FUNCTIONALITY -->
   <script>
     (function() {
-      // ⚠️ CRITICAL: Configure your proxy URL here
-      // Replace with your actual Scramjet proxy endpoint
-      // Example: const PROXY_URL = 'https://your-domain.com/scramjet/';
-      // If running locally: const PROXY_URL = '/scramjet/';
-      const PROXY_URL = '/scramjet/'; // CHANGE THIS TO YOUR PROXY URL
+      const PROXY_URL = '/scramjet/';
       
       const proxyIframe = document.getElementById('proxyIframe');
       const urlInput = document.getElementById('proxyUrlInput');
@@ -540,50 +696,40 @@
       const loadingIndicator = document.getElementById('loadingIndicator');
       const proxyWelcome = document.getElementById('proxyWelcome');
 
-      // Load URL through proxy
       function loadProxyUrl(url) {
         if (!url || !url.trim()) return;
         
         let finalUrl = url.trim();
 
-        // Hide welcome message
         if (proxyWelcome) {
           proxyWelcome.style.display = 'none';
         }
 
-        // If not a URL, treat as search query
         if (!finalUrl.includes('.') && !finalUrl.startsWith('http')) {
           finalUrl = `https://duckduckgo.com/?q=${encodeURIComponent(finalUrl)}`;
         }
 
-        // Add https if missing
         if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
           finalUrl = 'https://' + finalUrl;
         }
 
-        // Update URL bar
         urlInput.value = finalUrl;
 
-        // Show loading
         if (loadingIndicator) {
           loadingIndicator.classList.add('active');
         }
 
-        // Load through Scramjet proxy
-        // The proxy will encode and handle the URL
         const proxiedUrl = PROXY_URL + encodeURIComponent(finalUrl);
         
         console.log('Loading proxied URL:', proxiedUrl);
         proxyIframe.src = proxiedUrl;
 
-        // Hide loading after iframe loads
         proxyIframe.onload = function() {
           if (loadingIndicator) {
             loadingIndicator.classList.remove('active');
           }
         };
 
-        // Fallback: hide loading after 3 seconds
         setTimeout(() => {
           if (loadingIndicator) {
             loadingIndicator.classList.remove('active');
@@ -591,7 +737,6 @@
         }, 3000);
       }
 
-      // Event listeners
       if (goBtn && urlInput) {
         goBtn.addEventListener('click', () => {
           const url = urlInput.value;
@@ -646,7 +791,6 @@
         });
       }
 
-      // Focus input when search page is shown
       const searchLink = document.getElementById('searchLink');
       if (searchLink) {
         searchLink.addEventListener('click', () => {
@@ -701,4 +845,67 @@
 
 </body>
 
-</html>
+</html>Download all your settings, favorites, and preferences as a JSON file. You can use this to backup your data or transfer it to another device.
+            </p>
+            <div class="data-actions">
+              <button class="data-btn primary" id="export-data-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export Data
+              </button>
+            </div>
+            <div class="data-info">
+              <strong>ℹ️ What gets exported:</strong>
+              <ul style="margin-top: 10px; margin-left: 20px;">
+                <li>Theme preferences</li>
+                <li>Tab cloaking settings</li>
+                <li>Panic button configuration</li>
+                <li>Favorite games</li>
+                <li>Game statistics and play time</li>
+                <li>All custom settings</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Import Section -->
+          <div class="data-section">
+            <h3>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Import Your Data
+            </h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
+              Upload a previously exported JSON file to restore your settings and preferences. This will merge with your current data.
+            </p>
+            <div class="data-actions">
+              <input type="file" id="import-file" accept=".json" />
+              <button class="data-btn primary" id="import-data-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Choose File to Import
+              </button>
+            </div>
+            <div class="data-info">
+              <strong>⚠️ Important:</strong> Make sure the file is a valid Relic export file. Importing will overwrite matching settings.
+            </div>
+          </div>
+
+          <!-- Clear Data Section -->
+          <div class="data-section">
+            <h3 style="color: #ef4444;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              Clear All Data
+            </h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
