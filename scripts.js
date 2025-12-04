@@ -37,28 +37,24 @@ function getSeasonalTheme() {
   const month = now.getMonth();
   const day = now.getDate();
   
-  // Halloween: October 20 - November 2
   if ((month === 9 && day >= 20) || (month === 10 && day <= 2)) {
     console.log('🎃 Halloween season detected!');
     return 'halloween';
   }
   
-  // Christmas: December 1 - January 5
   if (month === 11 || (month === 0 && day <= 5)) {
     console.log('🎄 Christmas season detected!');
     return 'christmas';
   }
   
-  // Spring: March 20 - June 20
   if (month > 1 && month < 5 || (month === 1 && day >= 20) || (month === 5 && day <= 20)) {
     console.log('🌸 Spring season detected!');
-    return 'ocean'; // Fresh, light theme for spring
+    return 'ocean';
   }
   
-  // Summer: June 21 - September 22
   if (month > 5 && month < 8 || (month === 5 && day >= 21) || (month === 8 && day <= 22)) {
     console.log('☀️ Summer season detected!');
-    return 'light'; // Bright theme for summer
+    return 'light';
   }
   
   console.log('✨ Default modern theme');
@@ -114,7 +110,6 @@ const presets = {
 
 // ===== THEME CONFIGURATIONS =====
 const themes = {
-  // Modern Dark Theme (Default)
   modern: { 
     bgColor: '#0f172a', 
     bgSecondary: '#1e293b',
@@ -133,7 +128,6 @@ const themes = {
     shadowGlow: '0 0 25px rgba(124, 58, 237, 0.4)'
   },
   
-  // Seasonal Themes
   halloween: { 
     bgColor: '#1a0a0a',
     bgSecondary: '#2a1a1a',
@@ -170,7 +164,6 @@ const themes = {
     shadowGlow: '0 0 25px rgba(230, 57, 70, 0.4)'
   },
   
-  // Additional Theme Options
   midnight: { 
     bgColor: '#0f0f23',
     bgSecondary: '#1a1a2e',
@@ -207,7 +200,6 @@ const themes = {
     shadowGlow: '0 0 25px rgba(0, 212, 255, 0.4)'
   },
   
-  // Light Theme Variant
   light: { 
     bgColor: '#f8fafc',
     bgSecondary: '#e2e8f0',
@@ -237,12 +229,12 @@ function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
   const size = Math.random() * 4 + 2;
-  snowflake.style.width = `${size}px`;
-  snowflake.style.height = `${size}px`;
-  snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+  snowflake.style.width = size + 'px';
+  snowflake.style.height = size + 'px';
+  snowflake.style.left = Math.random() * window.innerWidth + 'px';
   const fallDuration = Math.random() * 10 + 5;
-  snowflake.style.animationDuration = `${fallDuration}s`;
-  snowflake.style.animationDelay = `${Math.random() * 15}s`;
+  snowflake.style.animationDuration = fallDuration + 's';
+  snowflake.style.animationDelay = Math.random() * 15 + 's';
   snowflake.style.opacity = (Math.random() * 0.5 + 0.3).toFixed(2);
   
   const snowContainer = document.getElementById('snow-container');
@@ -296,43 +288,32 @@ function applyTabCloaking(title, favicon) {
 
 // ===== THEME SYSTEM =====
 function applyTheme(themeName) {
-  const theme = themes[themeName] || themes.modern; // Fallback to modern theme
+  const theme = themes[themeName] || themes.modern;
   console.log('🎨 Applying theme:', themeName);
   
-  // Apply CSS variables
-  document.documentElement.style.setProperty('--bg-color', theme.bgColor);
-  document.documentElement.style.setProperty('--bg-secondary', theme.bgSecondary || theme.bgColor);
-  document.documentElement.style.setProperty('--nav-color', theme.navColor);
-  document.documentElement.style.setProperty('--accent-color', theme.accentColor);
-  document.documentElement.style.setProperty('--accent-secondary', theme.accentSecondary || theme.accentColor);
-  document.documentElement.style.setProperty('--accent-tertiary', theme.accentTertiary || theme.accentColor);
-  document.documentElement.style.setProperty('--text-color', theme.textColor);
-  document.documentElement.style.setProperty('--text-muted', theme.textMuted || theme.textColor + 'b3');
-  document.documentElement.style.setProperty('--border-color', theme.borderColor);
-  document.documentElement.style.setProperty('--hover-bg', theme.hoverBg);
-  document.documentElement.style.setProperty('--btn-bg', theme.btnBg);
-  document.documentElement.style.setProperty('--btn-hover-bg', theme.btnHoverBg || theme.accentColor);
-  document.documentElement.style.setProperty('--glass-bg', theme.glassBg || theme.navColor + 'cc');
-  document.documentElement.style.setProperty('--glass-border', theme.glassBorder || theme.accentColor + '40');
-  document.documentElement.style.setProperty('--shadow-glow', theme.shadowGlow || `0 0 25px ${theme.accentColor}66`);
+  const root = document.documentElement;
+  root.style.setProperty('--bg-color', theme.bgColor);
+  root.style.setProperty('--bg-secondary', theme.bgSecondary || theme.bgColor);
+  root.style.setProperty('--nav-color', theme.navColor);
+  root.style.setProperty('--accent-color', theme.accentColor);
+  root.style.setProperty('--accent-secondary', theme.accentSecondary || theme.accentColor);
+  root.style.setProperty('--accent-tertiary', theme.accentTertiary || theme.accentColor);
+  root.style.setProperty('--text-color', theme.textColor);
+  root.style.setProperty('--text-muted', theme.textMuted || theme.textColor + 'b3');
+  root.style.setProperty('--border-color', theme.borderColor);
+  root.style.setProperty('--hover-bg', theme.hoverBg);
+  root.style.setProperty('--btn-bg', theme.btnBg);
+  root.style.setProperty('--btn-hover-bg', theme.btnHoverBg || theme.accentColor);
+  root.style.setProperty('--glass-bg', theme.glassBg || theme.navColor + 'cc');
+  root.style.setProperty('--glass-border', theme.glassBorder || theme.accentColor + '40');
+  root.style.setProperty('--shadow-glow', theme.shadowGlow || '0 0 25px ' + theme.accentColor + '66');
   
-  // Update meta theme color for mobile browsers
   const metaThemeColor = document.querySelector('meta[name="theme-color"]');
   if (metaThemeColor) {
     metaThemeColor.setAttribute('content', theme.bgColor);
   }
   
-  // Save theme preference
   localStorage.setItem('selectedTheme', themeName);
-  const root = document.documentElement;
-  root.style.setProperty('--bg-color', theme.bgColor);
-  root.style.setProperty('--nav-color', theme.navColor);
-  root.style.setProperty('--accent-color', theme.accentColor);
-  root.style.setProperty('--text-color', theme.textColor);
-  root.style.setProperty('--border-color', theme.borderColor);
-  root.style.setProperty('--hover-bg', theme.hoverBg);
-  root.style.setProperty('--btn-bg', theme.btnBg);
-  root.style.setProperty('--btn-hover-bg', theme.btnHoverBg);
 }
 
 // ===== LOAD SETTINGS =====
@@ -450,17 +431,20 @@ function setupPanicButton() {
 }
 
 // ===== UTILITY FUNCTIONS =====
-function debounce(func, delay = 300) {
+function debounce(func, delay) {
+  delay = delay || 300;
   let timeout;
-  return function (...args) {
+  return function() {
+    const context = this;
+    const args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), delay);
+    timeout = setTimeout(() => func.apply(context, args), delay);
   };
 }
 
 function hideAll() {
-  document.querySelectorAll('.content').forEach(c => (c.style.display = 'none'));
-  document.querySelectorAll('.navbar li a').forEach(link => link.classList.remove('active'));
+  document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+  document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
   const infoButtons = document.querySelector('.homepage-info-buttons');
   if (infoButtons) infoButtons.style.display = 'none';
 }
@@ -480,14 +464,7 @@ function displayGameOfTheDay() {
     const game = getGameOfTheDay();
     if (!game) return;
     
-    gotdContainer.innerHTML = `
-      <div class="gotd-card">
-        <div class="gotd-badge">🌟 Game of the Day</div>
-        <img src="${game.image}" alt="${game.name}" loading="lazy" />
-        <h3>${game.name}</h3>
-        <button class="gotd-play-btn" onclick="loadGame('${game.url}')">Play Now</button>
-      </div>
-    `;
+    gotdContainer.innerHTML = '<div class="gotd-card"><div class="gotd-badge">🌟 Game of the Day</div><img src="' + game.image + '" alt="' + game.name + '" loading="lazy" /><h3>' + game.name + '</h3><button class="gotd-play-btn" onclick="loadGame(\'' + game.url + '\')">Play Now</button></div>';
   } catch (error) {
     console.error('❌ Error displaying Game of the Day:', error);
   }
@@ -503,6 +480,7 @@ function showHome() {
   const infoButtons = document.querySelector('.homepage-info-buttons');
   if (infoButtons) infoButtons.style.display = 'flex';
   displayGameOfTheDay();
+  console.log('🏠 Showing Home page');
 }
 
 function showGames() {
@@ -529,6 +507,22 @@ function showGames() {
       renderGames(games);
     }
   }
+  console.log('🎮 Showing Games page');
+}
+
+function showSearch() {
+  hideAll();
+  const searchContent = document.getElementById('content-srch');
+  if (searchContent) searchContent.style.display = 'block';
+  const searchLink = document.getElementById('searchLink');
+  if (searchLink) searchLink.classList.add('active');
+  
+  setTimeout(() => {
+    const proxyInput = document.getElementById('proxyUrlInput');
+    if (proxyInput) proxyInput.focus();
+  }, 100);
+  
+  console.log('🔍 Showing Proxy Search page');
 }
 
 function showApps() {
@@ -541,6 +535,7 @@ function showApps() {
   if (typeof apps !== 'undefined' && Array.isArray(apps)) {
     renderApps(apps);
   }
+  console.log('📱 Showing Apps page');
 }
 
 function showWebsites() {
@@ -553,6 +548,7 @@ function showWebsites() {
   if (typeof websites !== 'undefined' && Array.isArray(websites)) {
     renderWebsites(websites);
   }
+  console.log('🌐 Showing Websites page');
 }
 
 function showAbout() {
@@ -561,6 +557,7 @@ function showAbout() {
   if (aboutContent) aboutContent.style.display = 'block';
   const aboutLink = document.getElementById('aboutLink');
   if (aboutLink) aboutLink.classList.add('active');
+  console.log('ℹ️ Showing About page');
 }
 
 function showSettings() {
@@ -569,6 +566,7 @@ function showSettings() {
   if (settingsContent) settingsContent.style.display = 'block';
   const settingsLink = document.getElementById('settingsLink');
   if (settingsLink) settingsLink.classList.add('active');
+  console.log('⚙️ Showing Settings page');
 }
 
 // ===== RENDER FUNCTIONS =====
@@ -591,11 +589,7 @@ function renderGames(gamesToRender) {
     const card = document.createElement('div');
     card.className = 'game-card';
     card.tabIndex = 0;
-    card.innerHTML = `
-      ${window.GameStats ? window.GameStats.createFavoriteButton(game.url, isFavorited) : ''}
-      <img src="${game.image || 'https://via.placeholder.com/250x250?text=Game'}" alt="${game.name}" loading="lazy" />
-      <h3>${game.name}</h3>
-    `;
+    card.innerHTML = (window.GameStats ? window.GameStats.createFavoriteButton(game.url, isFavorited) : '') + '<img src="' + (game.image || 'https://via.placeholder.com/250x250?text=Game') + '" alt="' + game.name + '" loading="lazy" /><h3>' + game.name + '</h3>';
     card.onclick = () => loadGame(game.url);
     card.onkeypress = (e) => { if (e.key === 'Enter') loadGame(game.url); };
     gameList.appendChild(card);
@@ -618,10 +612,7 @@ function renderApps(appsToRender) {
     
     const card = document.createElement('div');
     card.className = 'app-card';
-    card.innerHTML = `
-      <img src="${app.image || 'https://via.placeholder.com/250x250?text=App'}" alt="${app.name}" loading="lazy" />
-      <h3>${app.name}</h3>
-    `;
+    card.innerHTML = '<img src="' + (app.image || 'https://via.placeholder.com/250x250?text=App') + '" alt="' + app.name + '" loading="lazy" /><h3>' + app.name + '</h3>';
     card.onclick = () => loadGame(app.url);
     appList.appendChild(card);
   });
@@ -647,15 +638,7 @@ function renderWebsites(websitesToRender) {
     const listItem = document.createElement('li');
     listItem.style.cssText = 'padding: 15px; margin-bottom: 10px; background: var(--nav-color); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.3s ease;';
     
-    listItem.innerHTML = `
-      <a href="${website.url}" target="_blank" style="color: var(--accent-color); text-decoration: none; font-size: 18px; display: flex; align-items: center; gap: 10px;">
-        <span>🔗</span>
-        <div>
-          <div style="font-weight: 600;">${website.name}</div>
-          <div style="font-size: 14px; color: var(--text-color); opacity: 0.7; margin-top: 4px;">${website.url}</div>
-        </div>
-      </a>
-    `;
+    listItem.innerHTML = '<a href="' + website.url + '" target="_blank" style="color: var(--accent-color); text-decoration: none; font-size: 18px; display: flex; align-items: center; gap: 10px;"><span>🔗</span><div><div style="font-weight: 600;">' + website.name + '</div><div style="font-size: 14px; color: var(--text-color); opacity: 0.7; margin-top: 4px;">' + website.url + '</div></div></a>';
     
     listItem.addEventListener('mouseenter', function() {
       this.style.background = 'var(--hover-bg)';
@@ -788,7 +771,6 @@ function toggleFullscreen() {
   }
 }
 
-// ===== INITIALIZATION =====
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
@@ -797,13 +779,13 @@ if (document.readyState === 'loading') {
 
 function initializeApp() {
   try {
-    console.log('🚀 Initializing GalaxyVerse...');
+    console.log('🚀 Initializing Relic...');
     console.log('✅ Free access enabled - No authentication required');
     console.log('📊 Console Status:', {
       available: !!window.GVerseConsole,
-      initialized: window.GVerseConsole?.initialized || false,
-      isOpen: window.GVerseConsole?.isOpen || false,
-      logCount: window.GVerseConsole?.logs?.length || 0
+      initialized: window.GVerseConsole ? window.GVerseConsole.initialized : false,
+      isOpen: window.GVerseConsole ? window.GVerseConsole.isOpen : false,
+      logCount: window.GVerseConsole && window.GVerseConsole.logs ? window.GVerseConsole.logs.length : 0
     });
   
   loadSettings();
@@ -879,7 +861,7 @@ function initializeApp() {
     resetBtn.addEventListener('click', () => {
       localStorage.removeItem('TabCloak_Title');
       localStorage.removeItem('TabCloak_Favicon');
-      document.title = 'GalaxyVerse';
+      document.title = 'Relic';
       const link = document.querySelector("link[rel~='icon']");
       if (link) link.href = '';
       const titleInput = document.getElementById('customTitle');
@@ -930,7 +912,6 @@ function initializeApp() {
     });
   }
 
-  // Navigation
   const homeLink = document.getElementById('homeLink');
   const gameLink = document.getElementById('gameLink');
   const appsLink = document.getElementById('appsLink');
@@ -947,7 +928,6 @@ function initializeApp() {
   if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAbout(); });
   if (searchLink) searchLink.addEventListener('click', (e) => { e.preventDefault(); showSearch(); });
 
-  // Back buttons
   const backToHomeGame = document.getElementById('backToHomeGame');
   const backToHomeApps = document.getElementById('backToHomeApps');
   const backToHomeWebsites = document.getElementById('backToHomeWebsites');
@@ -969,7 +949,6 @@ function initializeApp() {
     backToHomeWebsites.addEventListener('click', () => showHome());
   }
 
-  // Search
   const searchBtn = document.getElementById('searchBtn');
   const searchInput = document.getElementById('searchInput');
   
@@ -984,7 +963,6 @@ function initializeApp() {
     searchInput.addEventListener('input', debounce(searchGames, 300));
   }
 
-  // Websites search
   const websitesSearchBtn = document.getElementById('websitesSearchBtn');
   const websitesSearchInput = document.getElementById('websitesSearchInput');
   
@@ -999,13 +977,12 @@ function initializeApp() {
     websitesSearchInput.addEventListener('input', debounce(searchWebsites, 300));
   }
 
-  // Fullscreen
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   if (fullscreenBtn) {
     fullscreenBtn.addEventListener('click', toggleFullscreen);
   }
 
-  console.log('✅ GalaxyVerse initialized successfully');
+  console.log('✅ Relic initialized successfully');
   console.log('📊 Console active - Press Ctrl+Shift+K to toggle');
   console.log('🎮 All features unlocked - No authentication required');
   console.log('✨ Enjoy free access to all games, apps, and websites!');
@@ -1015,4 +992,3 @@ function initializeApp() {
     alert('An error occurred during initialization. Check console.');
   }
 }
-/* UPDATE THIS EVERTIME IT IS CHANGED EX: UPD 1 */
