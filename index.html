@@ -290,19 +290,10 @@
           </p>
         </div>
 
-        <!-- Top Carousel - Scrolling Left to Right -->
+        <!-- Single Scrolling Game Carousel -->
         <div class="carousel-wrapper">
           <div class="games-carousel">
-            <div class="carousel-track scroll-left-to-right" id="carousel-track-top">
-              <!-- Game cards will be dynamically loaded here -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Carousel - Scrolling Right to Left -->
-        <div class="carousel-wrapper">
-          <div class="games-carousel">
-            <div class="carousel-track scroll-right-to-left" id="carousel-track-bottom">
+            <div class="carousel-track scroll-right-to-left" id="carousel-track-top">
               <!-- Game cards will be dynamically loaded here -->
             </div>
           </div>
@@ -517,9 +508,8 @@
     console.log('Page loaded, checking for games data...');
     setTimeout(() => {
       console.log('Games available:', typeof games !== 'undefined' ? games.length : 'NOT LOADED');
-      console.log('Carousel tracks found:', {
-        top: !!document.getElementById('carousel-track-top'),
-        bottom: !!document.getElementById('carousel-track-bottom')
+      console.log('Carousel track found:', {
+        top: !!document.getElementById('carousel-track-top')
       });
     }, 2000);
   </script>
