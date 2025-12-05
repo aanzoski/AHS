@@ -1,9 +1,6 @@
-/* Modern Relic Stylesheet v6.0 */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
 :root {
-  /* Modern Color Palette */
   --bg-color: #0a0e1a;
   --bg-secondary: #12171f;
   --nav-color: #1a1f2e;
@@ -16,11 +13,11 @@
   --btn-bg: #2d3548;
   --btn-hover-bg: #6366f1;
   
-  /* Glassmorphism */
+  
   --glass-bg: rgba(26, 31, 46, 0.7);
   --glass-border: rgba(99, 102, 241, 0.2);
   
-  /* Shadows */
+  
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -37,7 +34,7 @@
   --sidebar-accent-border: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
 }
 
-/* Base Styles */
+
 * {
   box-sizing: border-box;
 }
@@ -780,7 +777,7 @@ body::before {
   letter-spacing: 0.3px;
 }
 
-/* Search Container */
+/* Search Cont */
 .search-container {
   display: flex;
   justify-content: center;
@@ -852,7 +849,7 @@ body::before {
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
-/* Game Play Area - MADE BIGGER */
+/* Game Play Area - BIGGER */
 .game-play-area {
   background: #000;
   border: 3px solid var(--accent-color);
@@ -866,8 +863,8 @@ body::before {
 
 .game-iframe {
   width: 100%;
-  height: 85vh; /* Increased from 600px to 85% of viewport height */
-  min-height: 700px; /* Minimum height to ensure it's always big enough */
+  height: 85vh; /* Increased from 600px to 85% of height */
+  min-height: 700px; /* Minimum height to ensure itss always big enough */
   border: none;
   border-radius: 16px;
 }
@@ -893,14 +890,3 @@ body::before {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
-
-/* Admin Panel Styles */
-.admin-subsection {
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
-}
-
-.admin-subsection h4 {
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, var
