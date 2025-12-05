@@ -1,36 +1,3 @@
-// Wait for console to be ready before proceeding
-if (window.GVerseConsole && !window.GVerseConsole.initialized) {
-  console.log('⏳ Waiting for console initialization...');
-  const waitForConsole = setInterval(() => {
-    if (window.GVerseConsole.initialized) {
-      clearInterval(waitForConsole);
-      console.log('✅ Console ready, continuing scripts.js initialization');
-    }
-  }, 50);
-}
-
-// ===== CONSOLE INTEGRATION =====
-console.log('📦 Loading scripts.js...');
-console.log('🔍 Checking console status:', window.GVerseConsole ? 'Available' : 'Not loaded');
-
-// ===== ALLOWED DOMAINS FOR AUTO-REDIRECT =====
-const ALLOWED_DOMAINS = [
-  'ahs.schoologydashboard.org.cdn.cloudflare.net',
-  'learn.schoologydashboard.org.cdn.cloudflare.net',
-  'gverse.schoologydashboard.org.cdn.cloudflare.net',
-  'schoologydashboard.org',
-  'galaxyverse-c1v.pages.dev',
-  'www.galaxyverse.org',
-  'galaxyverse.org',
-  'schoologycourses.org'
-];
-
-// ===== CHECK IF ON ALLOWED DOMAIN =====
-function isOnAllowedDomain() {
-  const hostname = window.location.hostname.toLowerCase();
-  return ALLOWED_DOMAINS.some(domain => hostname.includes(domain.replace('www.', '')));
-}
-
 // ===== SEASONAL THEME SYSTEM (BUILT-IN) =====
 function getSeasonalTheme() {
   const now = new Date();
@@ -38,26 +5,21 @@ function getSeasonalTheme() {
   const day = now.getDate();
   
   if ((month === 9 && day >= 20) || (month === 10 && day <= 2)) {
-    console.log('🎃 Halloween season detected!');
     return 'halloween';
   }
   
   if (month === 11 || (month === 0 && day <= 5)) {
-    console.log('🎄 Christmas season detected!');
     return 'christmas';
   }
   
   if (month > 1 && month < 5 || (month === 1 && day >= 20) || (month === 5 && day <= 20)) {
-    console.log('🌸 Spring season detected!');
     return 'ocean';
   }
   
   if (month > 5 && month < 8 || (month === 5 && day >= 21) || (month === 8 && day <= 22)) {
-    console.log('☀️ Summer season detected!');
     return 'light';
   }
   
-  console.log('✨ Default modern theme');
   return 'modern';
 }
 
@@ -72,7 +34,6 @@ function shouldAutoApplySeasonalTheme() {
   const isInAboutBlank = window.self !== window.top;
   
   if (aboutBlankEnabled === 'enabled' && !isInAboutBlank) {
-    console.log('🔒 About:blank cloaking enabled');
     const currentURL = window.location.href;
     const win = window.open('about:blank', '_blank');
     
@@ -252,7 +213,6 @@ function startSnow() {
   if (snowInterval) return;
   snowEnabled = true;
   snowInterval = setInterval(createSnowflake, 200);
-  console.log('❄️ Snow effect started');
 }
 
 function stopSnow() {
@@ -263,7 +223,6 @@ function stopSnow() {
   }
   const snowContainer = document.getElementById('snow-container');
   if (snowContainer) snowContainer.innerHTML = '';
-  console.log('🛑 Snow effect stopped');
 }
 
 // ===== TAB CLOAKING =====
@@ -271,7 +230,6 @@ function applyTabCloaking(title, favicon) {
   if (title) {
     document.title = title;
     localStorage.setItem('TabCloak_Title', title);
-    console.log('🔖 Tab title changed to:', title);
   }
   if (favicon) {
     let link = document.querySelector("link[rel~='icon']");
@@ -282,14 +240,12 @@ function applyTabCloaking(title, favicon) {
     }
     link.href = favicon;
     localStorage.setItem('TabCloak_Favicon', favicon);
-    console.log('🖼️ Tab favicon changed to:', favicon);
   }
 }
 
 // ===== THEME SYSTEM =====
 function applyTheme(themeName) {
   const theme = themes[themeName] || themes.modern;
-  console.log('🎨 Applying theme:', themeName);
   
   const root = document.documentElement;
   root.style.setProperty('--bg-color', theme.bgColor);
@@ -318,17 +274,13 @@ function applyTheme(themeName) {
 
 // ===== LOAD SETTINGS =====
 function loadSettings() {
-  console.log('⚙️ Loading settings...');
-  
   let themeToUse = 'original';
   const savedTheme = localStorage.getItem('selectedTheme');
   
   if (!savedTheme && shouldAutoApplySeasonalTheme()) {
     themeToUse = getSeasonalTheme();
-    console.log('🎨 Auto-applying seasonal theme:', themeToUse);
   } else if (savedTheme) {
     themeToUse = savedTheme;
-    console.log('🎨 Using saved theme:', themeToUse);
   }
 
   const savedTitle = localStorage.getItem('TabCloak_Title');
@@ -376,7 +328,6 @@ function loadSettings() {
   }
 
   applyTheme(themeToUse);
-  console.log('✅ Settings loaded successfully');
 }
 
 // ===== PANIC BUTTON =====
@@ -384,11 +335,8 @@ function setupPanicButton() {
   const savedHotkey = localStorage.getItem('hotkey') || '`';
   const savedRedirect = localStorage.getItem('redirectURL') || 'https://google.com';
   
-  console.log('🚨 Panic button setup - Hotkey:', savedHotkey);
-  
   document.addEventListener('keydown', (e) => {
     if (e.key === savedHotkey) {
-      console.log('🚨 Panic button activated!');
       window.location.href = savedRedirect;
     }
   });
@@ -410,7 +358,6 @@ function setupPanicButton() {
         hotkeyInput.value = e.key;
         localStorage.setItem('hotkey', e.key);
         hotkeyInput.blur();
-        console.log('🔑 Hotkey changed to:', e.key);
       }
     });
   }
@@ -423,7 +370,6 @@ function setupPanicButton() {
       const url = redirectInput.value.trim();
       if (url) {
         localStorage.setItem('redirectURL', url);
-        console.log('🔗 Redirect URL changed to:', url);
         alert('Redirect URL updated!');
       }
     });
@@ -449,27 +395,6 @@ function hideAll() {
   if (infoButtons) infoButtons.style.display = 'none';
 }
 
-// ===== GAME OF THE DAY =====
-function displayGameOfTheDay() {
-  console.log('🎮 Displaying Game of the Day');
-  const gotdContainer = document.getElementById('game-of-the-day-container');
-  if (!gotdContainer) return;
-  
-  if (typeof getGameOfTheDay !== 'function') {
-    console.error('❌ getGameOfTheDay not found');
-    return;
-  }
-  
-  try {
-    const game = getGameOfTheDay();
-    if (!game) return;
-    
-    gotdContainer.innerHTML = '<div class="gotd-card"><div class="gotd-badge">🌟 Game of the Day</div><img src="' + game.image + '" alt="' + game.name + '" loading="lazy" /><h3>' + game.name + '</h3><button class="gotd-play-btn" onclick="loadGame(\'' + game.url + '\')">Play Now</button></div>';
-  } catch (error) {
-    console.error('❌ Error displaying Game of the Day:', error);
-  }
-}
-
 // ===== NAVIGATION FUNCTIONS =====
 function showHome() {
   hideAll();
@@ -479,8 +404,6 @@ function showHome() {
   if (homeLink) homeLink.classList.add('active');
   const infoButtons = document.querySelector('.homepage-info-buttons');
   if (infoButtons) infoButtons.style.display = 'flex';
-  displayGameOfTheDay();
-  console.log('🏠 Showing Home page');
 }
 
 function showGames() {
@@ -507,7 +430,6 @@ function showGames() {
       renderGames(games);
     }
   }
-  console.log('🎮 Showing Games page');
 }
 
 function showSearch() {
@@ -521,8 +443,6 @@ function showSearch() {
     const proxyInput = document.getElementById('proxyUrlInput');
     if (proxyInput) proxyInput.focus();
   }, 100);
-  
-  console.log('🔍 Showing Proxy Search page');
 }
 
 function showApps() {
@@ -535,7 +455,6 @@ function showApps() {
   if (typeof apps !== 'undefined' && Array.isArray(apps)) {
     renderApps(apps);
   }
-  console.log('📱 Showing Apps page');
 }
 
 function showWebsites() {
@@ -548,7 +467,6 @@ function showWebsites() {
   if (typeof websites !== 'undefined' && Array.isArray(websites)) {
     renderWebsites(websites);
   }
-  console.log('🌐 Showing Websites page');
 }
 
 function showAbout() {
@@ -557,7 +475,6 @@ function showAbout() {
   if (aboutContent) aboutContent.style.display = 'block';
   const aboutLink = document.getElementById('aboutLink');
   if (aboutLink) aboutLink.classList.add('active');
-  console.log('ℹ️ Showing About page');
 }
 
 function showSettings() {
@@ -566,7 +483,6 @@ function showSettings() {
   if (settingsContent) settingsContent.style.display = 'block';
   const settingsLink = document.getElementById('settingsLink');
   if (settingsLink) settingsLink.classList.add('active');
-  console.log('⚙️ Showing Settings page');
 }
 
 // ===== RENDER FUNCTIONS =====
@@ -660,19 +576,16 @@ function renderWebsites(websitesToRender) {
 
 function loadGame(url) {
   if (!url) {
-    console.error('❌ No URL provided');
+    console.error('No URL provided');
     alert('Error: Game URL is missing.');
     return;
   }
-  
-  console.log('🎮 Loading game:', url);
   
   try {
     const isYouTube = url.includes('/others/assets/apps/YouTube.html') || url.includes('youtu.be');
     
     if (isYouTube) {
       window.open(url, '_blank');
-      console.log('▶️ Opening YouTube in new tab');
       return;
     }
     
@@ -681,7 +594,7 @@ function loadGame(url) {
     const gameIframe = document.getElementById('game-iframe');
     
     if (!gameDisplay || !gameIframe) {
-      console.error('❌ Game display elements not found');
+      console.error('Game display elements not found');
       alert('Error: Unable to load game.');
       return;
     }
@@ -695,18 +608,17 @@ function loadGame(url) {
     gameDisplay.style.display = 'block';
     
     gameIframe.onload = function() {
-      console.log('✅ Game loaded successfully');
       if (window.GameStats) {
         window.GameStats.startTracking(url);
       }
     };
     
     gameIframe.onerror = function() {
-      console.error('❌ Failed to load game:', url);
+      console.error('Failed to load game:', url);
       alert('Error loading game.');
     };
   } catch (error) {
-    console.error('❌ Error in loadGame:', error);
+    console.error('Error in loadGame:', error);
     alert('An error occurred while loading the game.');
   }
 }
@@ -716,10 +628,9 @@ function searchGames() {
   if (!searchInput) return;
   
   const query = searchInput.value.toLowerCase().trim();
-  console.log('🔍 Searching games for:', query);
   
   if (typeof games === 'undefined' || !Array.isArray(games)) {
-    console.error('❌ games array not found');
+    console.error('games array not found');
     return;
   }
   
@@ -729,7 +640,6 @@ function searchGames() {
   }
   
   const filtered = games.filter(game => game && game.name && game.name.toLowerCase().includes(query));
-  console.log('✅ Found', filtered.length, 'matching games');
   renderGames(filtered);
 }
 
@@ -740,7 +650,7 @@ function searchWebsites() {
   const query = searchInput.value.toLowerCase().trim();
   
   if (typeof websites === 'undefined' || !Array.isArray(websites)) {
-    console.error('❌ websites array not found');
+    console.error('websites array not found');
     return;
   }
   
@@ -760,14 +670,14 @@ function toggleFullscreen() {
   try {
     if (!document.fullscreenElement) {
       gameIframe.requestFullscreen().catch(err => {
-        console.error('❌ Fullscreen error:', err);
+        console.error('Fullscreen error:', err);
         alert('Fullscreen not available. Click on the game first.');
       });
     } else {
       document.exitFullscreen();
     }
   } catch (error) {
-    console.error('❌ Fullscreen error:', error);
+    console.error('Fullscreen error:', error);
   }
 }
 
@@ -779,216 +689,35 @@ if (document.readyState === 'loading') {
 
 function initializeApp() {
   try {
-    console.log('🚀 Initializing Relic...');
-    console.log('✅ Free access enabled - No authentication required');
-    console.log('📊 Console Status:', {
-      available: !!window.GVerseConsole,
-      initialized: window.GVerseConsole ? window.GVerseConsole.initialized : false,
-      isOpen: window.GVerseConsole ? window.GVerseConsole.isOpen : false,
-      logCount: window.GVerseConsole && window.GVerseConsole.logs ? window.GVerseConsole.logs.length : 0
-    });
-  
-  loadSettings();
-  showHome();
-  setupPanicButton();
+    loadSettings();
+    showHome();
+    setupPanicButton();
 
-  const themeSelect = document.getElementById('themeSelect');
-  if (themeSelect) {
-    const savedTheme = localStorage.getItem('selectedTheme');
-    if (savedTheme) {
-      themeSelect.value = savedTheme;
-    } else if (shouldAutoApplySeasonalTheme()) {
-      themeSelect.value = getSeasonalTheme();
-    } else {
-      themeSelect.value = 'original';
-    }
-    
-    themeSelect.addEventListener('change', (e) => {
-      const theme = e.target.value;
-      applyTheme(theme);
-      localStorage.setItem('selectedTheme', theme);
-      console.log('🎨 Theme manually selected:', theme);
-    });
-  }
-
-  const creditsBtn = document.getElementById('creditsBtn');
-  const updateLogBtn = document.getElementById('updateLogBtn');
-  const creditsModal = document.getElementById('creditsModal');
-  const updateLogModal = document.getElementById('updateLogModal');
-
-  if (creditsBtn && creditsModal) {
-    creditsBtn.addEventListener('click', () => {
-      creditsModal.style.display = 'block';
-    });
-  }
-
-  if (updateLogBtn && updateLogModal) {
-    updateLogBtn.addEventListener('click', () => {
-      updateLogModal.style.display = 'block';
-    });
-  }
-
-  document.querySelectorAll('.info-close').forEach(closeBtn => {
-    closeBtn.addEventListener('click', function() {
-      const modalId = this.getAttribute('data-modal');
-      const modalElement = document.getElementById(modalId);
-      if (modalElement) {
-        modalElement.style.display = 'none';
-      }
-    });
-  });
-
-  window.onclick = (e) => {
-    if (e.target.classList.contains('info-modal')) {
-      e.target.style.display = 'none';
-    }
-  };
-
-  const applyBtn = document.getElementById('applyBtn');
-  if (applyBtn) {
-    applyBtn.addEventListener('click', () => {
-      const titleInput = document.getElementById('customTitle');
-      const faviconInput = document.getElementById('customFavicon');
-      const title = titleInput ? titleInput.value.trim() : '';
-      const favicon = faviconInput ? faviconInput.value.trim() : '';
-      applyTabCloaking(title, favicon);
-      alert('Tab cloaking applied!');
-    });
-  }
-
-  const resetBtn = document.getElementById('resetBtn');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      localStorage.removeItem('TabCloak_Title');
-      localStorage.removeItem('TabCloak_Favicon');
-      document.title = 'Relic';
-      const link = document.querySelector("link[rel~='icon']");
-      if (link) link.href = '';
-      const titleInput = document.getElementById('customTitle');
-      const faviconInput = document.getElementById('customFavicon');
-      if (titleInput) titleInput.value = '';
-      if (faviconInput) faviconInput.value = '';
-      const presetSelect = document.getElementById('presetSelect');
-      if (presetSelect) presetSelect.value = '';
-      alert('Tab cloaking reset!');
-    });
-  }
-
-  const presetSelect = document.getElementById('presetSelect');
-  if (presetSelect) {
-    presetSelect.addEventListener('change', (e) => {
-      const selected = presets[e.target.value];
-      if (selected) {
-        const titleInput = document.getElementById('customTitle');
-        const faviconInput = document.getElementById('customFavicon');
-        if (titleInput) titleInput.value = selected.title;
-        if (faviconInput) faviconInput.value = selected.favicon;
-        applyTabCloaking(selected.title, selected.favicon);
-      }
-    });
-  }
-
-  const snowToggle = document.getElementById('snowToggle');
-  if (snowToggle) {
-    snowToggle.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        localStorage.setItem('snowEffect', 'enabled');
-        startSnow();
+    const themeSelect = document.getElementById('themeSelect');
+    if (themeSelect) {
+      const savedTheme = localStorage.getItem('selectedTheme');
+      if (savedTheme) {
+        themeSelect.value = savedTheme;
+      } else if (shouldAutoApplySeasonalTheme()) {
+        themeSelect.value = getSeasonalTheme();
       } else {
-        localStorage.setItem('snowEffect', 'disabled');
-        stopSnow();
+        themeSelect.value = 'original';
       }
-    });
-  }
+      
+      themeSelect.addEventListener('change', (e) => {
+        const theme = e.target.value;
+        applyTheme(theme);
+        localStorage.setItem('selectedTheme', theme);
+      });
+    }
 
-  const aboutBlankToggle = document.getElementById('aboutBlankToggle');
-  if (aboutBlankToggle) {
-    aboutBlankToggle.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        localStorage.setItem('aboutBlank', 'enabled');
-      } else {
-        localStorage.removeItem('aboutBlank');
-      }
-    });
-  }
+    const creditsBtn = document.getElementById('creditsBtn');
+    const updateLogBtn = document.getElementById('updateLogBtn');
+    const creditsModal = document.getElementById('creditsModal');
+    const updateLogModal = document.getElementById('updateLogModal');
 
-  const homeLink = document.getElementById('homeLink');
-  const gameLink = document.getElementById('gameLink');
-  const appsLink = document.getElementById('appsLink');
-  const websitesLink = document.getElementById('websitesLink');
-  const settingsLink = document.getElementById('settingsLink');
-  const aboutLink = document.getElementById('aboutLink');
-  const searchLink = document.getElementById('searchLink');
-
-  if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
-  if (gameLink) gameLink.addEventListener('click', (e) => { e.preventDefault(); showGames(); });
-  if (appsLink) appsLink.addEventListener('click', (e) => { e.preventDefault(); showApps(); });
-  if (websitesLink) websitesLink.addEventListener('click', (e) => { e.preventDefault(); showWebsites(); });
-  if (settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSettings(); });
-  if (aboutLink) aboutLink.addEventListener('click', (e) => { e.preventDefault(); showAbout(); });
-  if (searchLink) searchLink.addEventListener('click', (e) => { e.preventDefault(); showSearch(); });
-
-  const backToHomeGame = document.getElementById('backToHomeGame');
-  const backToHomeApps = document.getElementById('backToHomeApps');
-  const backToHomeWebsites = document.getElementById('backToHomeWebsites');
-  
-  if (backToHomeGame) {
-    backToHomeGame.addEventListener('click', () => {
-      if (window.GameStats) {
-        window.GameStats.stopTracking();
-      }
-      showHome();
-    });
-  }
-  
-  if (backToHomeApps) {
-    backToHomeApps.addEventListener('click', () => showHome());
-  }
-  
-  if (backToHomeWebsites) {
-    backToHomeWebsites.addEventListener('click', () => showHome());
-  }
-
-  const searchBtn = document.getElementById('searchBtn');
-  const searchInput = document.getElementById('searchInput');
-  
-  if (searchBtn) {
-    searchBtn.addEventListener('click', searchGames);
-  }
-  
-  if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') searchGames();
-    });
-    searchInput.addEventListener('input', debounce(searchGames, 300));
-  }
-
-  const websitesSearchBtn = document.getElementById('websitesSearchBtn');
-  const websitesSearchInput = document.getElementById('websitesSearchInput');
-  
-  if (websitesSearchBtn) {
-    websitesSearchBtn.addEventListener('click', searchWebsites);
-  }
-  
-  if (websitesSearchInput) {
-    websitesSearchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') searchWebsites();
-    });
-    websitesSearchInput.addEventListener('input', debounce(searchWebsites, 300));
-  }
-
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
-  if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
-  }
-
-  console.log('✅ Relic initialized successfully');
-  console.log('📊 Console active - Press Ctrl+Shift+K to toggle');
-  console.log('🎮 All features unlocked - No authentication required');
-  console.log('✨ Enjoy free access to all games, apps, and websites!');
-  
-  } catch (error) {
-    console.error('❌ Critical error during initialization:', error);
-    alert('An error occurred during initialization. Check console.');
-  }
-}
+    if (creditsBtn && creditsModal) {
+      creditsBtn.addEventListener('click', () => {
+        creditsModal.style.display = 'block';
+      });
+    }
