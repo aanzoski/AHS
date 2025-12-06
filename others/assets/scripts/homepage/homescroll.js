@@ -15,7 +15,7 @@
         setTimeout(initCarousels, 200);
         return;
       }
-      console.error('Carousel track not found');
+      console.error('Homepage track not found');
       return;
     }
 
@@ -79,12 +79,8 @@
         
         if (gameUrl) {
           if (typeof loadGame === 'function') {
-            const gameObj = games.find(g => g.url === gameUrl);
-            if (gameObj) {
-              loadGame(gameObj);
-            } else {
-              loadGameByUrl(gameUrl, gameName);
-            }
+            // Pass the URL string directly, not the game object
+            loadGame(gameUrl);
           } else {
             loadGameByUrl(gameUrl, gameName);
           }
