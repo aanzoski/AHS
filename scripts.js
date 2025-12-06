@@ -1,4 +1,5 @@
-// ===== SEASONAL THEME SYSTEM (BUILT-IN) =====
+// 70/30
+// SEASONAL THEME SYSTEM (BUILT-IN)
 function getSeasonalTheme() {
   const now = new Date();
   const month = now.getMonth();
@@ -485,7 +486,70 @@ function showSettings() {
   if (settingsLink) settingsLink.classList.add('active');
 }
 
-// ===== RENDER FUNCTIONS =====
+// Only showing the fixed loadgame smth function and renderGames function
+
+function loadGame(urlOrGame) {
+  // Handle both url. Anzo is inactive LOL XD.  strings and game objects
+  let url;
+  
+  if (typeof urlOrGame === 'string') {
+    url = urlOrGame;
+  } else if (urlOrGame && typeof urlOrGame === 'object' && urlOrGame.url) {
+    url = urlOrGame.url;
+  } else {
+    console.error('Invalid argument provided to loadGame:', urlOrGame);
+    alert('Error: Invalid game data.');
+    return;
+  }
+  
+  if (!url) {
+    console.error('No URL provided');
+    alert('Error: Game URL is missing.');
+    return;
+  }
+  
+  try {
+    const isYouTube = url.includes('/others/assets/apps/YouTube.html') || url.includes('youtu.be');
+    
+    if (isYouTube) {
+      window.open(url, '_blank');
+      return;
+    }
+    
+    hideAll();
+    const gameDisplay = document.getElementById('game-display');
+    const gameIframe = document.getElementById('game-iframe');
+    
+    if (!gameDisplay || !gameIframe) {
+      console.error('Game display elements not found');
+      alert('Error: Unable to load game.');
+      return;
+    }
+    
+    if (window.GameStats) {
+      window.GameStats.stopTracking();
+    }
+    
+    gameIframe.src = '';
+    gameIframe.src = url;
+    gameDisplay.style.display = 'block';
+    
+    gameIframe.onload = function() {
+      if (window.GameStats) {
+        window.GameStats.startTracking(url);
+      }
+    };
+    
+    gameIframe.onerror = function() {
+      console.error('Failed to load game:', url);
+      alert('Error loading game.');
+    };
+  } catch (error) {
+    console.error('Error in loadGame:', error);
+    alert('An error occurred while loading the game.');
+  }
+}
+
 function renderGames(gamesToRender) {
   const gameList = document.getElementById('game-list');
   if (!gameList) return;
@@ -506,8 +570,11 @@ function renderGames(gamesToRender) {
     card.className = 'game-card';
     card.tabIndex = 0;
     card.innerHTML = (window.GameStats ? window.GameStats.createFavoriteButton(game.url, isFavorited) : '') + '<img src="' + (game.image || 'https://via.placeholder.com/250x250?text=Game') + '" alt="' + game.name + '" loading="lazy" /><h3>' + game.name + '</h3>';
+    
+    // Pass the URL string instead of calling loadGame with the entire game object
     card.onclick = () => loadGame(game.url);
     card.onkeypress = (e) => { if (e.key === 'Enter') loadGame(game.url); };
+    
     gameList.appendChild(card);
   });
 }
